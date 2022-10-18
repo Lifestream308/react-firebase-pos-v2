@@ -4,6 +4,7 @@ import { db, auth } from './firebase-config';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { async } from '@firebase/util';
+import LoginComponent from './components/LoginComponent';
 
 function App() {
 
@@ -77,7 +78,6 @@ function App() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(users)
     }
     getUsers()
   }, [])
@@ -88,22 +88,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {true && <>
-        <h1>Sign In Below</h1>
-        <label>Username: </label>
-        <input type='text' placeholder="Username" onChange={(e) => setLoginEmail(e.target.value)}></input>
-        <label>Password: </label>
-        <input type='text' placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)}></input>
-
-        <div className='flex'>
-          <button onClick={login}>Login</button>
-          <button onClick={logout}>Logout</button>
-        </div>
-        <button onClick={() => console.log(users.filter(x => x.companyEmail == user.email))}>Console Users</button>
-        </>}
+        <LoginComponent setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} login={login} logout={logout} />
 
         {user ? user.email : "User not logged in."}
 
+        <button onClick={() => console.log(users.filter(x => x.companyEmail == user.email))}>Console Users</button>
       </header>
     </div>
   );
