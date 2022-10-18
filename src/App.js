@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthState
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { async } from '@firebase/util';
 import LoginComponent from './components/LoginComponent';
+import ItemComponent from './components/ItemComponent';
 
 function App() {
 
@@ -55,8 +56,9 @@ function App() {
   // Firebase Database - Create, Update, Delete, Read
   const [newName, setNewName] = useState("")
   const [newAge, setNewAge] = useState(0)
-
-  const [users, setUsers] = useState(['empty'])
+  
+  const [users, setUsers] = useState([])
+  // let menuItems = users.filter(x => x.companyEmail == user.email)
   const usersCollectionRef = collection(db, "users")
   
   const createUser = async () => {
@@ -91,8 +93,11 @@ function App() {
         <LoginComponent setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} login={login} logout={logout} />
 
         {user ? user.email : "User not logged in."}
+        <button onClick={() => console.log(users)}>Console Items</button>
 
-        <button onClick={() => console.log(users.filter(x => x.companyEmail == user.email))}>Console Users</button>
+        {user && users.filter(x => x.companyEmail == user.email).map(item => { 
+          return <ItemComponent key={item.menuItemName} item={item} />
+        })}
       </header>
     </div>
   );
