@@ -1,13 +1,12 @@
 import React from 'react'
 
-export default function LoginComponent({ setLoginEmail, setLoginPassword, login, logout }) {
+export default function LoginComponent({ loginEmail, loginPassword, login, logout }) {
   return (<>
-    <div>LoginComponent</div>
     <h1>Sign In Below</h1>
         <label>Username: </label>
-        <input type='text' placeholder="Username" onChange={(e) => setLoginEmail(e.target.value)}></input>
+        <input type='text' placeholder="Username" ref={loginEmail}></input>
         <label>Password: </label>
-        <input type='text' placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)}></input>
+        <input type='text' placeholder="Password" ref={loginPassword}></input>
 
         <div className='flex'>
           <button onClick={login}>Login</button>

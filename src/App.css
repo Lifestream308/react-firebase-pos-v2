@@ -26,3 +26,17 @@ button {
 .flex {
   display: flex;
 }
+
+.lgAside {
+  width: 40%;
+  min-width: 10rem;
+  text-align: right;
+}
+
+.margin2 {
+  margin: 1rem 2rem 2rem 2rem;
+}
+
+.amount {
+  width: 6rem;
+}
