@@ -1,22 +1,10 @@
 .App {
   text-align: center;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  font-size: calc(12px + 2vmin);
+  min-height: 100vh;
+  padding: 0 5% 0 5%;
 }
 
 button {
@@ -34,9 +22,21 @@ button {
 }
 
 .margin2 {
-  margin: 1rem 2rem 2rem 2rem;
+  margin: 2rem 2rem 2rem 2rem;
 }
 
 .amount {
   width: 6rem;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+}
+
+.wide {
+  width: 80%;
+}
+
+.cardWidth {
+  width: 12rem;
 }

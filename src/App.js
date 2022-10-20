@@ -59,7 +59,6 @@ function App() {
   const [newAge, setNewAge] = useState(0)
   
   const [users, setUsers] = useState([])
-  // let menuItems = users.filter(x => x.companyEmail == user.email)
   const usersCollectionRef = collection(db, "users")
   
   const createUser = async () => {
@@ -104,22 +103,26 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <LoginComponent loginEmail={loginEmail} loginPassword={loginPassword} login={login} logout={logout} />
 
-        {user ? user.email : "User not logged in."}
+        { user &&  
+        <div className='flex spaceBetween wide'>
+          <span className='margin2'>{ user.email }</span>
+          <button onClick={logout}>Logout</button>
+        </div> 
+        }
 
-        <button onClick={() => console.log(findTotal())}>Console Total</button>
+        {!user && <LoginComponent loginEmail={loginEmail} loginPassword={loginPassword} login={login} logout={logout} /> }
 
-        <button onClick={() => console.log(amounts()[0].value)}>Amounts</button>
+        <h2>Menu</h2>
 
-        <div className='flex'>
-          <div>
-          {user && users.filter(x => x.companyEmail == user.email).map(item => { 
-            return <ItemComponent key={item.menuItemName} item={item} />
+        <div className='flex wide spaceBetween'>
+          <div className='flex'>
+          {user && users.filter(x => x.companyEmail === user.email).map(item => { 
+            return <ItemComponent key={item.menuItemName} item={item} findTotal={findTotal} />
           })}
           </div>
           <div className='lgAside'>
-          <p>Total: { total }</p>
+          <p className='margin2'>Total: $ { total }</p>
           </div>
         </div>
       </header>
