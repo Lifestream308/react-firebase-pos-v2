@@ -54,15 +54,18 @@ function App() {
   // End of Firebase Create/Login/Logout User
 
 
-  // Firebase Database - Create, Update, Delete, Read
+  // Firebase CRUD - Create, Update, Delete, Read
   const [newName, setNewName] = useState("")
   const [newAge, setNewAge] = useState(0)
+
+  const newItemName = useRef()
+  const newItemPrice = useRef()
   
   const [users, setUsers] = useState([])
   const usersCollectionRef = collection(db, "users")
   
   const createUser = async () => {
-    await addDoc(usersCollectionRef, {name: newName, age: newAge})
+    await addDoc(usersCollectionRef, {menuItemName: newItemName.current.value, Price: Number(newItemPrice.current.value), companyEmail: user.email})
   }
 
   const updateUser = async (id, age) => {
@@ -84,7 +87,7 @@ function App() {
     }
     getUsers()
   }, [])
-  // End of Firebase Database - Create, Update, Delete, Read
+  // End of Firebase CRUD - Create, Update, Delete, Read
 
 
   // Calculate Total. Adds up the price of all items in the Menu based on amount * price
@@ -118,8 +121,8 @@ function App() {
 
         <h2 className='underline'>Menu</h2>
 
-        <div className='flex wide spaceBetween'>
-          <div className='flex'>
+        <div className='flex wide spaceAround'>
+          <div className='flex wrap'>
           {user && users.filter(x => x.companyEmail === user.email).map(item => { 
             return <ItemComponent key={item.menuItemName} item={item} findTotal={findTotal} />
           })}
@@ -128,6 +131,17 @@ function App() {
           <p className='margin2'>Total: $ { total }</p>
           </div>
         </div>
+
+        <h2 className='underline'>Add Items To Menu</h2>
+        <div>
+          <label>Name</label>
+          <input type='text' ref={newItemName} />
+        </div>
+        <div>
+          <label>Price</label>
+          <input type='number' ref={newItemPrice} />
+        </div>
+        <button onClick={createUser}>Add Item</button>
       </header>
     </div>
   );

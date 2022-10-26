@@ -14,9 +14,11 @@ button {
 .flex {
   display: flex;
 }
+.wrap {
+  flex-wrap: wrap;
+}
 
 .lgAside {
-  width: 40%;
   min-width: 10rem;
   text-align: right;
 }
@@ -39,6 +41,9 @@ button {
 .spaceBetween {
   justify-content: space-between;
 }
+.spaceAround {
+  justify-content: space-around;
+}
 .spaceCenter {
   justify-content: center;
 }
@@ -48,7 +53,7 @@ button {
 }
 
 .cardWidth {
-  width: 12rem;
+  width: 10rem;
 }
 
 .text-center {
