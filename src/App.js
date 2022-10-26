@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { db, auth } from './firebase-config';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
-import { async } from '@firebase/util';
+// import { async } from '@firebase/util';
 import LoginComponent from './components/LoginComponent';
 import ItemComponent from './components/ItemComponent';
 
@@ -84,9 +84,10 @@ function App() {
     }
     getUsers()
   }, [])
+  // End of Firebase Database - Create, Update, Delete, Read
 
 
-
+  // Calculate Total. Adds up the price of all items in the Menu based on amount * price
   const [total, setTotal] = useState(0)
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
@@ -113,7 +114,9 @@ function App() {
 
         {!user && <LoginComponent loginEmail={loginEmail} loginPassword={loginPassword} login={login} logout={logout} /> }
 
-        <h2>Menu</h2>
+        <hr/>
+
+        <h2 className='underline'>Menu</h2>
 
         <div className='flex wide spaceBetween'>
           <div className='flex'>

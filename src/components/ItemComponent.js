@@ -3,7 +3,7 @@ import React from 'react'
 export default function ItemComponent({ item, findTotal }) {
 
   return (
-    <div className='margin2 cardWidth'>
+    <div className='margin1 cardWidth'>
         <div>{item.menuItemName}</div>
         <span>$</span>
         <span className='price'>{item.Price}</span>

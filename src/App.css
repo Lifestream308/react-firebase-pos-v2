@@ -4,7 +4,7 @@
   color: white;
   font-size: calc(12px + 2vmin);
   min-height: 100vh;
-  padding: 0 5% 0 5%;
+  padding: 5% 5% 0 5%;
 }
 
 button {
@@ -21,8 +21,15 @@ button {
   text-align: right;
 }
 
+.margin1 {
+  margin: 2rem 0rem;
+}
 .margin2 {
   margin: 2rem 2rem 2rem 2rem;
+}
+
+.margin-top {
+  margin-top: 0;
 }
 
 .amount {
@@ -32,6 +39,9 @@ button {
 .spaceBetween {
   justify-content: space-between;
 }
+.spaceCenter {
+  justify-content: center;
+}
 
 .wide {
   width: 80%;
@@ -39,4 +49,11 @@ button {
 
 .cardWidth {
   width: 12rem;
+}
+
+.text-center {
+  text-align: center;
+}
+.underline {
+  text-decoration: underline;
 }
