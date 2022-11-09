@@ -10,7 +10,6 @@ export default function LoginComponent({ loginEmail, loginPassword, login, logou
 
         <div className='flex spaceCenter'>
           <button onClick={login}>Login</button>
-          <button onClick={logout}>Logout</button>
         </div>
     </>
   )

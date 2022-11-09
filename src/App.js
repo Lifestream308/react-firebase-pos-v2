@@ -6,6 +6,7 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase
 // import { async } from '@firebase/util';
 import LoginComponent from './components/LoginComponent';
 import ItemComponent from './components/ItemComponent';
+import UserComponent from './components/UserComponent';
 
 function App() {
 
@@ -108,14 +109,8 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        { user &&  
-        <div className='flex spaceBetween wide'>
-          <span className='margin2'>{ user.email }</span>
-          <button onClick={logout}>Logout</button>
-        </div> 
-        }
-
-        {!user && <LoginComponent loginEmail={loginEmail} loginPassword={loginPassword} login={login} logout={logout} /> }
+        { !user && <LoginComponent loginEmail={loginEmail} loginPassword={loginPassword} login={login} /> }
+        { user && <UserComponent logout={logout} user={user} /> }
 
         <hr/>
 
@@ -131,6 +126,9 @@ function App() {
           <p className='margin2'>Total: $ { total }</p>
           </div>
         </div>
+
+
+        
 
         <h2 className='underline'>Add Items To Menu</h2>
         <div>
