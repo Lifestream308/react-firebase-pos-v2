@@ -11,12 +11,10 @@ import UserComponent from './components/UserComponent';
 function App() {
 
   // Firebase Create User, Login User, Logout User
-  const [registerEmail, setRegisterEmail] = useState("")
-  const [registerPassword, setRegisterPassword] = useState("")
   const [user, setUser] = useState({})
 
-  const loginEmail = useRef()
-  const loginPassword = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -28,8 +26,8 @@ function App() {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
+        emailRef.current.value,
+        passwordRef.current.value
       )
       console.log(user)
     } catch (error) {
@@ -41,8 +39,8 @@ function App() {
     try {
       const user = await signInWithEmailAndPassword(
         auth,
-        loginEmail.current.value,
-        loginPassword.current.value
+        emailRef.current.value,
+        passwordRef.current.value
       )
     } catch (error) {
       console.log(error.message)
@@ -56,9 +54,6 @@ function App() {
 
 
   // Firebase CRUD - Create, Update, Delete, Read
-  const [newName, setNewName] = useState("")
-  const [newAge, setNewAge] = useState(0)
-
   const newItemName = useRef()
   const newItemPrice = useRef()
   
@@ -109,7 +104,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        { !user && <LoginComponent loginEmail={loginEmail} loginPassword={loginPassword} login={login} /> }
+        { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} /> }
         { user && <UserComponent logout={logout} user={user} /> }
 
         <hr/>
@@ -126,9 +121,6 @@ function App() {
           <p className='margin2'>Total: $ { total }</p>
           </div>
         </div>
-
-
-        
 
         <h2 className='underline'>Add Items To Menu</h2>
         <div>
