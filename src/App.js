@@ -47,6 +47,21 @@ function App() {
     }
   }
 
+  // Guest Login Function
+  const guestLogin = async () => {
+    const guestEmail = "guest@guest.com"
+    const guestPassword = "password"
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        guestEmail,
+        guestPassword
+      )
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   const logout = async () => {
     await signOut(auth)
   }
@@ -104,7 +119,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} /> }
+        { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} /> }
         { user && <UserComponent logout={logout} user={user} /> }
 
         <hr/>
