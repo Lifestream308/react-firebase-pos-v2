@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function LoginComponent({ emailRef, passwordRef, login, register }) {
+export default function LoginComponent({ emailRef, passwordRef, login, register, guestLogin }) {
   return (<>
     <h1 className='margin-top'>Sign In Below</h1>
         <label>Username: </label>
@@ -11,6 +11,7 @@ export default function LoginComponent({ emailRef, passwordRef, login, register 
         <div className='flex spaceCenter'>
           <button onClick={login}>Login</button>
           <button onClick={register}>Register</button>
+          <button onClick={guestLogin}>Guest Login</button>
         </div>
     </>
   )

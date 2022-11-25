@@ -49,7 +49,7 @@ function App() {
 
   // Guest Login Function
   const guestLogin = async () => {
-    const guestEmail = "guest@guest.com"
+    const guestEmail = "green@green.com"
     const guestPassword = "password"
     try {
       const user = await signInWithEmailAndPassword(
@@ -69,14 +69,14 @@ function App() {
 
 
   // Firebase CRUD - Create, Update, Delete, Read
-  const newItemName = useRef()
-  const newItemPrice = useRef()
+  const itemNameRef = useRef()
+  const itemPriceRef = useRef()
   
-  const [users, setUsers] = useState([])
+  const [registerItems, setRegisterItems] = useState([])
   const usersCollectionRef = collection(db, "users")
   
   const createUser = async () => {
-    await addDoc(usersCollectionRef, {menuItemName: newItemName.current.value, Price: Number(newItemPrice.current.value), companyEmail: user.email})
+    await addDoc(usersCollectionRef, {menuItemName: itemNameRef.current.value, Price: Number(itemPriceRef.current.value), companyEmail: user.email})
   }
 
   const updateUser = async (id, age) => {
@@ -94,7 +94,7 @@ function App() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setUsers(firebaseArray);
+      setRegisterItems(firebaseArray);
     }
     getUsers()
   }, [])
@@ -119,16 +119,16 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} /> }
+        { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} guestLogin={guestLogin} /> }
         { user && <UserComponent logout={logout} user={user} /> }
 
         <hr/>
 
-        <h2 className='underline'>Menu</h2>
+        <h2 className='underline'>Your Register Cloud</h2>
 
         <div className='flex wide spaceAround'>
           <div className='flex wrap'>
-          {user && users.filter(x => x.companyEmail === user.email).map(item => { 
+          {user && registerItems.filter(registerItem => registerItem.companyEmail === user.email).map(item => { 
             return <ItemComponent key={item.menuItemName} item={item} findTotal={findTotal} />
           })}
           </div>
@@ -137,14 +137,14 @@ function App() {
           </div>
         </div>
 
-        <h2 className='underline'>Add Items To Menu</h2>
+        <h2 className='underline'>Add Items To Register</h2>
         <div>
           <label>Name</label>
-          <input type='text' ref={newItemName} />
+          <input type='text' ref={itemNameRef} />
         </div>
         <div>
           <label>Price</label>
-          <input type='number' ref={newItemPrice} />
+          <input type='number' ref={itemPriceRef} />
         </div>
         <button onClick={createUser}>Add Item</button>
       </header>
