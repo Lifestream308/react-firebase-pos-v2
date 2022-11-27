@@ -117,7 +117,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
 
         { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} guestLogin={guestLogin} /> }
         { user && <UserComponent logout={logout} user={user} /> }
@@ -147,7 +147,7 @@ function App() {
           <input type='number' ref={itemPriceRef} />
         </div>
         <button onClick={createUser}>Add Item</button>
-      </header>
+      </div>
     </div>
   );
 }
