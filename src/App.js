@@ -120,7 +120,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-header">
+      <div className="App">
 
         { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} guestLogin={guestLogin} /> }
         { user && <UserComponent logout={logout} user={user} /> }
