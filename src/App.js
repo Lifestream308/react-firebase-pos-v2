@@ -7,6 +7,9 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase
 import LoginComponent from './components/LoginComponent';
 import ItemComponent from './components/ItemComponent';
 import UserComponent from './components/UserComponent';
+import Home from './components/Home';
+import New from './components/New';
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
 
@@ -148,6 +151,10 @@ function App() {
         </div>
         <button onClick={createUser}>Add Item</button>
       </div>
+      <Routes>
+        <Route path='/' element={ <Home /> }></Route>
+        <Route path='/new' element={ <New /> }></Route>
+      </Routes>
     </div>
   );
 }
