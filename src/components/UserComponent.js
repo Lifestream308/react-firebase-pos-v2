@@ -2,9 +2,17 @@ import React from 'react'
 
 export default function UserComponent({logout, user}) {
   return (
-    <div className='flex spaceBetween wide'>
-    <span className='margin2'>{ user.email }</span>
-    <button onClick={logout}>Logout</button>
-  </div> 
+    <>
+      <nav className='userComponent__nav'>
+        <h1>Register Cloud</h1>
+        <button onClick={logout}>Logout</button>
+      </nav>
+
+      <hr />
+
+      <div className='flex spaceBetween'>
+        <span className='margin2'>{ user.email }</span>
+      </div> 
+  </>
   )
 }

@@ -66,11 +66,9 @@
 }
 .loginComponent__inputCard button {
   color: white;
-  /* width: 100%; */
   padding: 12px;
   margin-bottom: 1.5rem;
   border-radius: 8px;
-  /* font-size: 120%; */
   font-weight: bold;
   text-decoration: none;
 }
@@ -94,10 +92,40 @@
   font-weight: bold;
   text-decoration: none;
   background-color: rgb(168, 163, 163);
-  width: 70%;
+  width: 60%;
+}
+.loginComponent__inputCard hr {color: rgb(224, 215, 215);}
+
+.userComponent__nav {
+  display: flex;
+  height: 4rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.userComponent__nav h1{
+  color: rgb(44, 44, 217);
+  margin-left: 2rem;
+}
+.userComponent__nav button{
+  color: white;
+  background-color: rgb(45, 44, 44);
+  font-size: 100%;
+  padding: 0px 12px 0px 12px;
+  margin-right: 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  height: 3rem;
 }
 
-
+.itemComponent {
+  margin: 1rem;
+  padding: 1rem;
+  width: 8rem;
+  height: 7rem;
+  background-color: lightblue;
+  border-radius: 1rem;
+}
 
 
 /* Margin / Padding Section */
@@ -126,21 +154,10 @@
 
 
 
-
-
 .lgAside {
   min-width: 10rem;
   text-align: right;
 }
 .amount {
   width: 6rem;
-}
-.wide {
-  width: 80%;
-}
-.cardWidth {
-  width: 10rem;
-}
-.underline {
-  text-decoration: underline;
 }

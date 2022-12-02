@@ -3,13 +3,13 @@ import { useState, useEffect, useRef } from 'react';
 import { db, auth } from './firebase-config';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
-// import { async } from '@firebase/util';
 import LoginComponent from './components/LoginComponent';
 import ItemComponent from './components/ItemComponent';
 import UserComponent from './components/UserComponent';
 import Home from './components/Home';
-import New from './components/New';
 import { Route, Routes } from 'react-router-dom'
+import AddItemsComponent from './components/AddItemsComponent';
+import RegisterComponent from './components/RegisterComponent';
 
 function App() {
 
@@ -123,38 +123,17 @@ function App() {
       <div className="App">
 
         { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} guestLogin={guestLogin} /> }
+
         { user && <UserComponent logout={logout} user={user} /> }
 
-        <hr/>
+        { user && <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} /> }
 
-        <h2 className='underline'>Your Register Cloud</h2>
-
-        <div className='flex wide spaceAround'>
-          <div className='flex wrap'>
-          {user && registerItems.filter(registerItem => registerItem.companyEmail === user.email).map(item => { 
-            return <ItemComponent key={item.menuItemName} item={item} findTotal={findTotal} />
-          })}
-          </div>
-          <div className='lgAside'>
-          <p className='margin2'>Total: $ { total }</p>
-          </div>
-        </div>
-
-        <h2 className='underline'>Add Items To Register</h2>
-        <div>
-          <label>Name</label>
-          <input type='text' ref={itemNameRef} />
-        </div>
-        <div>
-          <label>Price</label>
-          <input type='number' ref={itemPriceRef} />
-        </div>
-        <button onClick={createUser}>Add Item</button>
+        { user && <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} /> }
       </div>
-      <Routes>
+
+      {/* <Routes>
         <Route path='/' element={ <Home /> }></Route>
-        <Route path='/new' element={ <New /> }></Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
