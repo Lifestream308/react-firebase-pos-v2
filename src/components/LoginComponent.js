@@ -15,7 +15,6 @@ export default function LoginComponent({ emailRef, passwordRef, login, register,
             <button className='loginComponent__button1' onClick={ login }>Login</button>
             <hr />
             <button className='loginComponent__button2' onClick={ register }>Create New Account</button>
-            {/* <button className='loginComponent__button3' onClick={ guestLogin }>Guest Login</button> */}
         </div>
     </div>
     </>

@@ -65,6 +65,10 @@
   font-size: 120%;
   border: 1px solid rgb(199, 190, 190);
 }
+.loginComponent button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
 .loginComponent__inputCard button {
   color: white;
   padding: 12px;
