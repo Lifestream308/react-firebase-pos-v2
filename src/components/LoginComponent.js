@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function LoginComponent({ emailRef, passwordRef, login, register, guestLogin }) {
   return (<>
-    <div class="flex spaceAround loginComponent">
+    <div class="flex spaceCenter loginComponent">
         <div class="loginComponent__header">
             <h1>Register Cloud</h1>
             <p>Point-Of-Sale service at your fingertips. Use the Guest Login to sample the experience.</p>

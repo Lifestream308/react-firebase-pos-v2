@@ -37,7 +37,7 @@
 }
 .loginComponent__header {
   max-width: 25rem;
-  margin-right: 0rem;
+  margin: 0 4rem;
 }
 .loginComponent__header h1 {
   color: rgb(44, 44, 217);
@@ -47,6 +47,7 @@
 .loginComponent__inputCard {
   width: 25rem;
   height: 22rem;
+  margin: 0 4rem;
   background-color: white;
   border-radius: 1rem;
   box-shadow:
