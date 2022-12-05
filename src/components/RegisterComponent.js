@@ -4,9 +4,9 @@ import ItemComponent from './ItemComponent'
 export default function RegisterComponent({ user, registerItems, findTotal, total }) {
   return (
     <>
-        <h2 className=''>Your Register Cloud</h2>
+        <h2 className='registerComponent__title'>Your Register Cloud</h2>
         <div className='flex spaceAround'>
-          <div className='flex wrap'>
+          <div className='flex wrap registerComponent__itemContainer'>
           {user && registerItems.filter(registerItem => registerItem.companyEmail === user.email).map(item => { 
             return <ItemComponent key={item.menuItemName} item={item} findTotal={findTotal} />
           })}

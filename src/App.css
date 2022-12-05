@@ -128,9 +128,47 @@
   padding: 1rem;
   width: 8rem;
   height: 7rem;
-  background-color: lightblue;
+  /* background-color: lightblue; */
+  background-color: rgb(186, 221, 233);
   border-radius: 1rem;
 }
+
+.registerComponent__title {
+  color: rgb(44, 44, 217);
+}
+.registerComponent__itemContainer {
+  border: 1px solid rgb(202, 197, 197);
+}
+.addItemsComponent {
+  padding: 0;
+}
+.addItemsComponent h2 {
+  color: rgb(44, 44, 217);
+}
+.addItemsComponent input {
+  padding: 12px 0 12px 12px;
+  margin: 0 0 1rem 0;
+  border-radius: 4px;
+  font-size: 120%;
+  border: 1px solid rgb(199, 190, 190);
+}
+.addItemsComponent button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
+.addItemsComponent button {
+  color: white;
+  padding: 12px;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: rgb(53, 100, 255);
+  width: 9rem;
+  font-size: 120%;
+}
+
+
 
 
 /* Margin / Padding Section */

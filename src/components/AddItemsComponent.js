@@ -2,17 +2,15 @@ import React from 'react'
 
 export default function AddItemsComponent({ itemNameRef, itemPriceRef, createUser }) {
   return (
-    <>
-        <h2 className=''>Add Items To Register</h2>
+    <div className='addItemsComponent'>
+        <h2>Add Items To Register</h2>
         <div>
-            <label>Name</label>
-            <input type='text' ref={itemNameRef} />
+            <input type='text' ref={itemNameRef} placeholder="Name" />
         </div>
         <div>
-            <label>Price</label>
-            <input type='number' ref={itemPriceRef} />
+            <input type='number' ref={itemPriceRef} placeholder="Price" />
         </div>
         <button onClick={createUser}>Add Item</button>
-    </>
+    </div>
   )
 }

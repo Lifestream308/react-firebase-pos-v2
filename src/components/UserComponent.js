@@ -11,7 +11,7 @@ export default function UserComponent({logout, user}) {
       <hr />
 
       <div className='flex spaceBetween'>
-        <span className='margin2'>{ user.email }</span>
+        <span className='margin2'>Welcome { user.email }</span>
       </div> 
   </>
   )
