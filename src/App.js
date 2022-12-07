@@ -4,12 +4,11 @@ import { db, auth } from './firebase-config';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import LoginComponent from './components/LoginComponent';
-import ItemComponent from './components/ItemComponent';
 import UserComponent from './components/UserComponent';
-import Home from './components/Home';
 import { Route, Routes } from 'react-router-dom'
 import AddItemsComponent from './components/AddItemsComponent';
 import RegisterComponent from './components/RegisterComponent';
+import Home from './components/Home'
 
 function App() {
 
@@ -126,14 +125,19 @@ function App() {
 
         { user && <UserComponent logout={logout} user={user} /> }
 
-        { user && <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} /> }
-
-        { user && <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} /> }
+        <Routes>
+          <Route path='/' element={ user && 
+            <>
+              <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} />
+              <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
+            </> }>              
+          </Route>
+          <Route path='/update' element={ user && <Home /> }>              
+          </Route>
+        </Routes>
       </div>
 
-      {/* <Routes>
-        <Route path='/' element={ <Home /> }></Route>
-      </Routes> */}
+
     </div>
   );
 }

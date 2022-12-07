@@ -204,6 +204,7 @@
   min-width: 10rem;
   text-align: right;
 }
+/* this classname used in findTotal() as a query selector. Fix later */
 .amount {
   width: 6rem;
 }
