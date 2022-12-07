@@ -111,6 +111,9 @@
   color: rgb(44, 44, 217);
   margin-left: 2rem;
 }
+.userComponent__nav a{
+  text-decoration: none;
+}
 .userComponent__nav button{
   color: white;
   background-color: rgb(45, 44, 44);
@@ -122,13 +125,16 @@
   text-decoration: none;
   height: 3rem;
 }
+.userComponent__nav button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
 
 .itemComponent {
   margin: 1rem;
   padding: 1rem;
   width: 8rem;
   height: 7rem;
-  /* background-color: lightblue; */
   background-color: rgb(186, 221, 233);
   border-radius: 1rem;
 }
@@ -205,7 +211,7 @@
 
 
 /* Media Queries */
-@media (max-width: 800px) {
+@media (max-width: 950px) {
   .loginComponent {
     flex-direction: column;
     align-items: center;
