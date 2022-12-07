@@ -194,13 +194,25 @@
 
 
 
-
-
-
 .lgAside {
   min-width: 10rem;
   text-align: right;
 }
 .amount {
   width: 6rem;
+}
+
+
+
+/* Media Queries */
+@media (max-width: 800px) {
+  .loginComponent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .loginComponent__inputCard {
+    width: 22rem;
+  }
 }
