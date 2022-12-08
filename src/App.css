@@ -141,15 +141,24 @@
   border-radius: 1rem;
 }
 
+.registerComponent {
+  max-width: 950px;
+}
 .registerComponent__title {
   color: rgb(44, 44, 217);
 }
 .registerComponent__itemContainer {
   border: 1px solid rgb(202, 197, 197);
   border-radius: 0.5rem;
+  box-shadow:
+  1px 2px 2px hsl(220deg 60% 50% / 0.333),
+  2px 4px 4px hsl(220deg 60% 50% / 0.333),
+  3px 6px 6px hsl(220deg 60% 50% / 0.333);
+  justify-content: center;
 }
 .addItemsComponent {
-  padding: 0;
+  max-width: 950px;
+  margin-top: 4rem;
 }
 .addItemsComponent h2 {
   color: rgb(44, 44, 217);
@@ -181,9 +190,26 @@
   min-width: 10rem;
   border: 1px solid lightgrey;
   border-radius: 0.5rem;
+  box-shadow:
+  1px 2px 2px hsl(220deg 60% 50% / 0.333),
+  2px 4px 4px hsl(220deg 60% 50% / 0.333),
+  3px 6px 6px hsl(220deg 60% 50% / 0.333);
 }
 .registerComponent__checkout h2 {
   color: rgb(44, 44, 217);
+}
+.updateComponent {
+  max-width: 950px;
+}
+.updateComponent__itemMap {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid lightgrey;
+  justify-content: center;
+  box-shadow:
+  1px 2px 2px hsl(220deg 60% 50% / 0.333),
+  2px 4px 4px hsl(220deg 60% 50% / 0.333),
+  3px 6px 6px hsl(220deg 60% 50% / 0.333);
 }
 
 
@@ -227,5 +253,12 @@
   }
   .loginComponent__inputCard {
     width: 22rem;
+  }
+}
+@media (max-width: 475px) {
+  .userComponent__nav button {
+    margin-right: 4px;
+    padding: 0 6px;
+    height: 2.5rem;
   }
 }

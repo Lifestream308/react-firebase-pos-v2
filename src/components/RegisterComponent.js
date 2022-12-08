@@ -3,7 +3,7 @@ import ItemComponent from './ItemComponent'
 
 export default function RegisterComponent({ user, registerItems, findTotal, total }) {
   return (
-    <>
+    <div className='registerComponent'>
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
         <div className='flex spaceAround'>
           <div className='flex wrap registerComponent__itemContainer'>
@@ -17,6 +17,6 @@ export default function RegisterComponent({ user, registerItems, findTotal, tota
             <p>Total: $ { total }</p>
           </div>
         </div>
-    </>
+    </div>
   )
 }

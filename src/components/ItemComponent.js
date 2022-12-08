@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function ItemComponent({ item, findTotal }) {
-
   return (
     <div className='itemComponent'>
         <div>{item.menuItemName}</div>

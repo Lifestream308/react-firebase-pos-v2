@@ -12,7 +12,7 @@ import UpdateComponent from './components/UpdateComponent';
 
 function App() {
 
-  // Firebase Create User, Login User, Logout User
+  // Firebase Create User, Login User, Logout User, Guest Login
   const [user, setUser] = useState({})
 
   const emailRef = useRef()
@@ -67,10 +67,10 @@ function App() {
   const logout = async () => {
     await signOut(auth)
   }
-  // End of Firebase Create/Login/Logout User
+  // End of Firebase Create/Login/Logout/Guest User
 
 
-  // Firebase CRUD - Create, Update, Delete, Read
+  // Firebase CRUD - Create, Update, Delete, Read Register Items
   const itemNameRef = useRef()
   const itemPriceRef = useRef()
   
@@ -79,17 +79,36 @@ function App() {
   
   const createUser = async () => {
     await addDoc(usersCollectionRef, {menuItemName: itemNameRef.current.value, Price: Number(itemPriceRef.current.value), companyEmail: user.email})
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      setRegisterItems(firebaseArray);
+    }
+    getUsers()
   }
 
-  const updateUser = async (id, age) => {
+  const updateUser = async (id, price) => {
     const userDoc = doc(db, "users", id)
-    const newFields = { age: age + 1 }
+    const newFields = { Price: price }
     await updateDoc(userDoc, newFields)
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      setRegisterItems(firebaseArray);
+    }
+    getUsers()
+    alert("Price Updated")
   }
 
   const deleteUser = async(id) => {
     const userDoc = doc(db, "users", id)
     await deleteDoc(userDoc)
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      setRegisterItems(firebaseArray);
+    }
+    getUsers()
   }
 
   useEffect(() => {
@@ -100,10 +119,10 @@ function App() {
     }
     getUsers()
   }, [])
-  // End of Firebase CRUD - Create, Update, Delete, Read
+  // End of Firebase CRUD - Create, Update, Delete, Read Register Items
 
 
-  // Calculate Total. Adds up the price of all items in the Menu based on amount * price
+  // Calculate Total. Adds up the price of all items in the Register based on amount * price
   const [total, setTotal] = useState(0)
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
@@ -132,7 +151,7 @@ function App() {
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
             </> }>              
           </Route>
-          <Route path='/update' element={ user && <UpdateComponent registerItems={registerItems} /> }>
+          <Route path='/update' element={ user && <UpdateComponent user={user} registerItems={registerItems} updateUser={updateUser} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
           </Route>
         </Routes>
       </div>
