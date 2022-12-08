@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthState
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import LoginComponent from './components/LoginComponent';
 import UserComponent from './components/UserComponent';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import AddItemsComponent from './components/AddItemsComponent';
 import RegisterComponent from './components/RegisterComponent';
 import UpdateComponent from './components/UpdateComponent';
@@ -119,6 +119,11 @@ function App() {
     }
     getUsers()
   }, [])
+
+  const location = useLocation()
+  useEffect(() => {
+    setTotal(0)
+  }, [user, location.pathname])
   // End of Firebase CRUD - Create, Update, Delete, Read Register Items
 
 
