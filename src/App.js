@@ -8,7 +8,7 @@ import UserComponent from './components/UserComponent';
 import { Route, Routes } from 'react-router-dom'
 import AddItemsComponent from './components/AddItemsComponent';
 import RegisterComponent from './components/RegisterComponent';
-import Home from './components/Home'
+import UpdateComponent from './components/UpdateComponent';
 
 function App() {
 
@@ -132,7 +132,7 @@ function App() {
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
             </> }>              
           </Route>
-          <Route path='/update' element={ user && <Home /> }>              
+          <Route path='/update' element={ user && <UpdateComponent registerItems={registerItems} /> }>
           </Route>
         </Routes>
       </div>

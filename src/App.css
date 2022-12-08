@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  /* background-color: rgb(255, 245, 245); */
   background-color: rgb(255, 253, 255);
   color: black;
   /* font-size: calc(12px + 2vmin); */
@@ -114,6 +113,9 @@
 .userComponent__nav a{
   text-decoration: none;
 }
+.userComponent__link {
+  color: white;
+}
 .userComponent__nav button{
   color: white;
   background-color: rgb(45, 44, 44);
@@ -144,6 +146,7 @@
 }
 .registerComponent__itemContainer {
   border: 1px solid rgb(202, 197, 197);
+  border-radius: 0.5rem;
 }
 .addItemsComponent {
   padding: 0;
@@ -174,6 +177,14 @@
   font-size: 120%;
 }
 
+.registerComponent__checkout {
+  min-width: 10rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.5rem;
+}
+.registerComponent__checkout h2 {
+  color: rgb(44, 44, 217);
+}
 
 
 
@@ -199,11 +210,6 @@
 
 
 
-
-.lgAside {
-  min-width: 10rem;
-  text-align: right;
-}
 /* this classname used in findTotal() as a query selector. Fix later */
 .amount {
   width: 6rem;

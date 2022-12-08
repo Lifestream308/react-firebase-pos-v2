@@ -1,13 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function UserComponent({logout, user}) {
   return (
     <>
       <nav className='userComponent__nav'>
-        <h1><a href='#'>Register Cloud</a></h1>
+        <h1><Link to='/'>Register Cloud</Link></h1>
         <span>
-          <button>Update</button>
-          <button onClick={logout}>Logout</button>
+          <button><Link className='userComponent__link' to='/update'>Update</Link></button>
+          <button onClick={logout}><Link className='userComponent__link' to='/'>Logout</Link></button>
         </span>
       </nav>
 
