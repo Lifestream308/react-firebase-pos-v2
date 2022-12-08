@@ -262,3 +262,8 @@
     height: 2.5rem;
   }
 }
+@media (max-width: 500px) {
+  .itemComponent {
+    margin: 1px;
+  }
+}
