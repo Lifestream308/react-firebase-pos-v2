@@ -11,7 +11,7 @@ export default function LoginComponent({ emailRef, passwordRef, login, register,
         <div className="loginComponent__inputCard">
             <input type="text" name="" id="" placeholder="Email" ref={ emailRef } />
             <br />
-            <input type="text" name="" id="" placeholder="Password" ref={ passwordRef } />
+            <input type="password" name="" id="" placeholder="Password" ref={ passwordRef } />
             <button className='loginComponent__button1' onClick={ login }>Login</button>
             <hr />
             <button className='loginComponent__button2' onClick={ register }>Create New Account</button>

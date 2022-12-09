@@ -51,7 +51,7 @@ function App() {
 
   // Guest Login Function
   const guestLogin = async () => {
-    const guestEmail = "green@green.com"
+    const guestEmail = "guest@guest.com"
     const guestPassword = "password"
     try {
       const user = await signInWithEmailAndPassword(
