@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function UpdateItemComponent({ item, updateUser, deleteUser }) {
   return (
-    <div className='itemComponent'>
+    <div className='updateItemComponent'>
         <div>{item.menuItemName}</div>
         <span>$</span>
         <input type='number' className='amount' defaultValue={item.Price} />

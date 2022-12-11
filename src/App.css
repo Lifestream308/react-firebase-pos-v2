@@ -210,6 +210,17 @@
   2px 4px 4px hsl(220deg 60% 50% / 0.333),
   3px 6px 6px hsl(220deg 60% 50% / 0.333);
 }
+.updateItemComponent {
+  margin: 1rem;
+  padding: 1rem;
+  width: 10rem;
+  height: 10rem;
+  background-color: rgb(186, 221, 233);
+  border-radius: 1rem;
+}
+.updateItemComponent button{
+  margin: 8px 0 0 0;
+}
 
 
 
