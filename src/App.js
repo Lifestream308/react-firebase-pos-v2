@@ -77,8 +77,32 @@ function App() {
   const [registerItems, setRegisterItems] = useState([])
   const usersCollectionRef = collection(db, "users")
   
+  const filteredItems = registerItems.filter(registerItem => registerItem.companyEmail === user.email)
+  const filteredNames = []
+  filteredItems.forEach(item => filteredNames.push(item.menuItemName))
+
   const createUser = async () => {
-    await addDoc(usersCollectionRef, {menuItemName: itemNameRef.current.value, Price: Number(itemPriceRef.current.value), companyEmail: user.email})
+    if (itemNameRef.current.value.trim() == '') {
+      alert("Enter a name")
+      return
+    }
+    if (itemNameRef.current.value.trim().length > 25 || itemNameRef.current.value.trim().length < 2) {
+      alert("Name must be between 2-25 Characters")
+      return
+    }
+    if (filteredNames.includes(itemNameRef.current.value.trim()))  {
+      alert("Name already used")
+      return
+    }
+    if (itemPriceRef.current.valueAsNumber <= 0 || itemPriceRef.current.valueAsNumber >= 1000) {
+      alert("Price must be between 0-1000")
+      return
+    }
+    if (isNaN(itemPriceRef.current.valueAsNumber)) {
+      alert("Price must be between 0-1000")
+      return
+    }
+    await addDoc(usersCollectionRef, {menuItemName: itemNameRef.current.value.trim(), Price: itemPriceRef.current.valueAsNumber, companyEmail: user.email})
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -88,6 +112,10 @@ function App() {
   }
 
   const updateUser = async (id, price) => {
+    if (price <= 0 || price >= 1000) {
+      alert("Price must be between 0-1000")
+      return
+    }
     const userDoc = doc(db, "users", id)
     const newFields = { Price: price }
     await updateDoc(userDoc, newFields)
