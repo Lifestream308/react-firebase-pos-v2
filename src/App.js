@@ -77,11 +77,13 @@ function App() {
   const [registerItems, setRegisterItems] = useState([])
   const usersCollectionRef = collection(db, "users")
   
-  const filteredItems = registerItems.filter(registerItem => registerItem.companyEmail === user.email)
-  const filteredNames = []
-  filteredItems.forEach(item => filteredNames.push(item.menuItemName))
+
 
   const createUser = async () => {
+    const filteredItems = registerItems.filter(registerItem => registerItem.companyEmail === user.email)
+    const filteredNames = []
+    filteredItems.forEach(item => filteredNames.push(item.menuItemName))
+
     if (itemNameRef.current.value.trim() == '') {
       alert("Enter a name")
       return
@@ -113,6 +115,10 @@ function App() {
 
   const updateUser = async (id, price) => {
     if (price <= 0 || price >= 1000) {
+      alert("Price must be between 0-1000")
+      return
+    }
+    if (isNaN(itemPriceRef.current.valueAsNumber)) {
       alert("Price must be between 0-1000")
       return
     }
