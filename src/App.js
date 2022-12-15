@@ -81,9 +81,7 @@ function App() {
 
   const createUser = async () => {
     const filteredItems = registerItems.filter(registerItem => registerItem.companyEmail === user.email)
-    const filteredNames = []
-    filteredItems.forEach(item => filteredNames.push(item.menuItemName))
-    console.log(Array.from(filteredItems, a => a.menuItemName))
+    const filteredNames = Array.from(filteredItems, a => a.menuItemName)
 
     if (itemNameRef.current.value.trim() == '') {
       alert("Enter a name")
