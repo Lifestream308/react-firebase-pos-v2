@@ -6,9 +6,9 @@ export default function UpdateItemComponent({ item, updateUser, deleteUser }) {
         <div>{item.menuItemName}</div>
         <span>$</span>
         <input type='number' className='amount' defaultValue={item.Price} />
-        <button onClick={(e) => {updateUser(item.id, e.target.previousSibling.valueAsNumber)}}>Update Price</button>
+        <button className='updateItemComponent__button1' onClick={(e) => {updateUser(item.id, e.target.previousSibling.valueAsNumber)}}>Update Price</button>
         <br></br>
-        <button onClick={() => {deleteUser(item.id)}}>Delete</button>
+        <button className='updateItemComponent__button2' onClick={() => {deleteUser(item.id)}}>Delete</button>
     </div>
   )
 }

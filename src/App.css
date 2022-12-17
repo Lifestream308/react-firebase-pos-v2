@@ -218,9 +218,28 @@
   background-color: rgb(186, 221, 233);
   border-radius: 1rem;
 }
-.updateItemComponent button{
-  margin: 8px 0 0 0;
+.updateItemComponent button:hover {
+  cursor: pointer;
+  opacity: .9;
 }
+.updateItemComponent button {
+  color: white;
+  padding: 8px;
+  margin-top: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.updateItemComponent__button1 {
+  background-color: rgb(122, 200, 6);
+  width: 80%;
+  font-size: 80%;
+}
+.updateItemComponent__button2 {
+  background-color: rgb(217, 31, 59);
+  width: 80%;
+  font-size: 80%;
+}
+
 
 
 

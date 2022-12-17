@@ -117,7 +117,7 @@ function App() {
       alert("Price must be between 0-1000")
       return
     }
-    if (isNaN(itemPriceRef.current.valueAsNumber)) {
+    if (isNaN(price)) {
       alert("Price must be between 0-1000")
       return
     }
@@ -189,7 +189,8 @@ function App() {
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
             </> }>              
           </Route>
-          <Route path='/update' element={ user && <UpdateComponent user={user} registerItems={registerItems} updateUser={updateUser} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
+          <Route path='/update' element={ user && 
+            <UpdateComponent user={user} registerItems={registerItems} updateUser={updateUser} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
           </Route>
         </Routes>
       </div>
