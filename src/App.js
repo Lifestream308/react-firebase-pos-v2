@@ -174,6 +174,12 @@ function App() {
     return totalCost
   }
 
+  const resetTotal = () => {
+    const amounts = () => window.document.querySelectorAll('.amount')
+    amounts().forEach((amount) => amount.valueAsNumber = 0)
+    setTotal(0)
+  }
+
   return (
     <div className="App">
       <div className="App">
@@ -185,7 +191,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} />
+              <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} resetTotal={resetTotal} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
             </> }>              
           </Route>
