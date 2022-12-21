@@ -197,6 +197,16 @@
 .registerComponent__checkout h2 {
   color: rgb(44, 44, 217);
 }
+.registerComponent__checkout button {
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: lightslategray;
+}
+.registerComponent__checkout button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
 .updateComponent {
   max-width: 950px;
 }
