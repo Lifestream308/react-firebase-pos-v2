@@ -156,12 +156,14 @@ function App() {
   const location = useLocation()
   useEffect(() => {
     setTotal(0)
+    setTotalItems(0)
   }, [user, location.pathname])
   // End of Firebase CRUD - Create, Update, Delete, Read Register Items
 
 
   // Calculate Total. Adds up the price of all items in the Register based on amount * price
   const [total, setTotal] = useState(0)
+  const [totalItems, setTotalItems] = useState(0)
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
 
@@ -171,6 +173,7 @@ function App() {
       totalCost += Number(prices()[i].innerHTML) * amounts()[i].value
     }
     setTotal(totalCost)
+    findTotalItems()
     return totalCost
   }
 
@@ -178,6 +181,15 @@ function App() {
     const amounts = () => window.document.querySelectorAll('.amount')
     amounts().forEach((amount) => amount.valueAsNumber = 0)
     setTotal(0)
+    setTotalItems(0)
+  }
+
+  const findTotalItems = () => {
+    let amountItems = 0
+    for (let i = 0; i < amounts().length; i++) {
+      amountItems += amounts()[i].valueAsNumber
+    }
+    setTotalItems(amountItems)
   }
 
   return (
@@ -191,7 +203,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} resetTotal={resetTotal} />
+              <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} resetTotal={resetTotal} totalItems={totalItems} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
             </> }>              
           </Route>
