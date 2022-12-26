@@ -194,8 +194,13 @@
 .registerComponent__checkout h2 {
   color: rgb(44, 44, 217);
 }
+.registerComponent__checkout span {
+  color: rgb(26, 147, 11);
+  margin-bottom: 1rem;
+}
 .registerComponent__checkout button {
   color: white;
+  margin-bottom: 1rem;
   padding: 8px;
   border: none;
   border-radius: 8px;
