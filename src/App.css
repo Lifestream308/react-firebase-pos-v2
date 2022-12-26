@@ -114,13 +114,16 @@
 .userComponent__link {
   color: white;
   padding: 12px 20px;
-  background-color: rgb(45, 44, 44);
+  background-color: teal;
   font-size: 110%;
   margin-right: 2rem;
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
   height: 3rem;
+}
+.userComponent__linkColor1 {
+  background-color: lightslategray;
 }
 .userComponent__link2 {
   color: rgb(44, 44, 217);
@@ -236,7 +239,6 @@
   opacity: .9;
 }
 .updateItemComponent button {
-  color: white;
   padding: 8px;
   margin-top: 12px;
   border: none;
@@ -244,12 +246,14 @@
   text-decoration: none;
 }
 .updateItemComponent__button1 {
-  background-color: rgb(122, 200, 6);
+  background-color: teal;
+  color: white;
   width: 80%;
   font-size: 80%;
 }
 .updateItemComponent__button2 {
-  background-color: rgb(217, 31, 59);
+  background-color: lightslategray;
+  color: white;
   width: 80%;
   font-size: 80%;
 }
