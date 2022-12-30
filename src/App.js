@@ -83,7 +83,7 @@ function App() {
     const filteredItems = registerItems.filter(registerItem => registerItem.companyEmail === user.email)
     const filteredNames = Array.from(filteredItems, a => a.menuItemName)
 
-    if (itemNameRef.current.value.trim() == '') {
+    if (itemNameRef.current.value.trim() === '') {
       alert("Enter a name")
       return
     }
@@ -166,6 +166,7 @@ function App() {
   const [totalItems, setTotalItems] = useState(0)
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
+  const names = () => window.document.querySelectorAll('.name')
 
   const findTotal = () => {
     let totalCost = 0
@@ -191,6 +192,15 @@ function App() {
     }
     setTotalItems(amountItems)
   }
+
+  const [cartList, setCartList] = useState({})
+
+  useEffect(() => {
+    if (totalItems > 0) {
+      setCartList({ [names()[0].innerHTML]: 0 })
+      console.log(cartList)
+    }
+  }, [totalItems])
 
   return (
     <div className="App">

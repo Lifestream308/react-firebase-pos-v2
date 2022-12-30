@@ -14,7 +14,7 @@ export default function RegisterComponent({ user, registerItems, findTotal, tota
           </div>
           <div className='registerComponent__checkout'>
             <h2>Checkout</h2>
-            <span><i class="bi bi-cart3"></i> {totalItems}</span>
+            <span><i className="bi bi-cart3"></i> {totalItems}</span>
             <p>Total: $ { total }</p>
             <button onClick={resetTotal}>Reset Total</button>
           </div>

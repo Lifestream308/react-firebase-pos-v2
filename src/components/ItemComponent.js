@@ -3,7 +3,7 @@ import React from 'react'
 export default function ItemComponent({ item, findTotal }) {
   return (
     <div className='itemComponent'>
-        <div>{item.menuItemName}</div>
+        <div className='name'>{item.menuItemName}</div>
         <span>$</span>
         <span className='price'>{item.Price}</span>
         <br></br>
