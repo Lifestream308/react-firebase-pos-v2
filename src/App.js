@@ -164,17 +164,20 @@ function App() {
   // Calculate Total. Adds up the price of all items in the Register based on amount * price
   const [total, setTotal] = useState(0)
   const [totalItems, setTotalItems] = useState(0)
+  const [cartList, setCartList] = useState({})
+
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
-  const names = () => window.document.querySelectorAll('.name')
 
-  const findTotal = () => {
+  const findTotal = (itemName, e) => {
     let totalCost = 0
     for (let i = 0; i < prices().length; i++) {
       totalCost += Number(prices()[i].innerHTML) * amounts()[i].value
     }
     setTotal(totalCost)
     findTotalItems()
+    setCartList(prev => ({...prev, [itemName]: e.target.valueAsNumber}))
+    console.log(cartList)
     return totalCost
   }
 
@@ -192,15 +195,6 @@ function App() {
     }
     setTotalItems(amountItems)
   }
-
-  const [cartList, setCartList] = useState({})
-
-  useEffect(() => {
-    if (totalItems > 0) {
-      setCartList({ [names()[0].innerHTML]: 0 })
-      console.log(cartList)
-    }
-  }, [totalItems])
 
   return (
     <div className="App">
