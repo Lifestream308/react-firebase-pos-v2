@@ -12,9 +12,8 @@ import UpdateComponent from './components/UpdateComponent';
 
 function App() {
 
-  // Firebase Create User, Login User, Logout User, Guest Login
+  // Firebase Create/Register User, Login User, Guest Login, Logout User
   const [user, setUser] = useState({})
-
   const emailRef = useRef()
   const passwordRef = useRef()
 
@@ -49,7 +48,6 @@ function App() {
     }
   }
 
-  // Guest Login Function
   const guestLogin = async () => {
     const guestEmail = "guest@guest.com"
     const guestPassword = "password"
@@ -67,20 +65,18 @@ function App() {
   const logout = async () => {
     await signOut(auth)
   }
-  // End of Firebase Create/Login/Logout/Guest User
+  // End of Firebase Register/Login/GuestLogin/Logout
 
 
   // Firebase CRUD - Create, Update, Delete, Read Register Items
   const itemNameRef = useRef()
   const itemPriceRef = useRef()
   
-  const [registerItems, setRegisterItems] = useState([])
+  const [firebaseItemsDB, setFirebaseItemsDB] = useState([])
   const usersCollectionRef = collection(db, "users")
-  
 
-
-  const createUser = async () => {
-    const filteredItems = registerItems.filter(registerItem => registerItem.companyEmail === user.email)
+  const createItem = async () => {
+    const filteredItems = firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email)
     const filteredNames = Array.from(filteredItems, a => a.menuItemName)
 
     if (itemNameRef.current.value.trim() === '') {
@@ -107,12 +103,12 @@ function App() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setRegisterItems(firebaseArray);
+      setFirebaseItemsDB(firebaseArray);
     }
     getUsers()
   }
 
-  const updateUser = async (id, price) => {
+  const updateItem = async (id, price) => {
     if (price <= 0 || price >= 1000) {
       alert("Price must be between 0-1000")
       return
@@ -127,7 +123,7 @@ function App() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setRegisterItems(firebaseArray);
+      setFirebaseItemsDB(firebaseArray);
     }
     getUsers()
     alert("Price Updated")
@@ -139,7 +135,7 @@ function App() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setRegisterItems(firebaseArray);
+      setFirebaseItemsDB(firebaseArray);
     }
     getUsers()
   }
@@ -148,7 +144,7 @@ function App() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setRegisterItems(firebaseArray);
+      setFirebaseItemsDB(firebaseArray);
     }
     getUsers()
   }, [])
@@ -160,30 +156,31 @@ function App() {
   }, [user, location.pathname])
   // End of Firebase CRUD - Create, Update, Delete, Read Register Items
 
-
-  // Calculate Total. Adds up the price of all items in the Register based on amount * price
+  // Cart Functions and Logic
   const [total, setTotal] = useState(0)
   const [totalItems, setTotalItems] = useState(0)
   const [cartList, setCartList] = useState({})
-
+  
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
-
-  // const handleTotal = (itemName, e) => {
-  //   findTotal(itemName, e)
-
-  // }
-
-  const findTotal = (itemName, e) => {
+  
+  const handleCartTotals = (itemName, e) => {
+      findTotal()
+      findTotalCartItems()
+      manageCartObject(itemName, e)
+    }
+    
+  // Calculate Total Price in Cart. Adds up the price of all items in the Register based on amount * price
+  const findTotal = () => {
     let totalCost = 0
     for (let i = 0; i < prices().length; i++) {
       totalCost += Number(prices()[i].innerHTML) * amounts()[i].value
     }
     setTotal(totalCost)
-    findTotalItems()
+  }
+
+  const manageCartObject = (itemName, e) => {
     setCartList(prev => ({...prev, [itemName]: e.target.valueAsNumber}))
-    console.log(cartList)
-    return totalCost
   }
 
   const resetTotal = () => {
@@ -191,15 +188,17 @@ function App() {
     amounts().forEach((amount) => amount.valueAsNumber = 0)
     setTotal(0)
     setTotalItems(0)
+    setCartList({})
   }
 
-  const findTotalItems = () => {
+  const findTotalCartItems = () => {
     let amountItems = 0
     for (let i = 0; i < amounts().length; i++) {
       amountItems += amounts()[i].valueAsNumber
     }
     setTotalItems(amountItems)
   }
+  // End of Cart Functions and Logic
 
   return (
     <div className="App">
@@ -212,12 +211,12 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} registerItems={registerItems} findTotal={findTotal} total={total} resetTotal={resetTotal} totalItems={totalItems} />
-              <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createUser={createUser} />
+              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetTotal={resetTotal} totalItems={totalItems} />
+              <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>
           <Route path='/update' element={ user && 
-            <UpdateComponent user={user} registerItems={registerItems} updateUser={updateUser} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
+            <UpdateComponent user={user} firebaseItemsDB={firebaseItemsDB} updateItem={updateItem} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
           </Route>
         </Routes>
       </div>

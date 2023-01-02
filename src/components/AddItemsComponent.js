@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AddItemsComponent({ itemNameRef, itemPriceRef, createUser }) {
+export default function AddItemsComponent({ itemNameRef, itemPriceRef, createItem }) {
   return (
     <div className='addItemsComponent'>
         <h2>Add Items To Register</h2>
@@ -10,7 +10,7 @@ export default function AddItemsComponent({ itemNameRef, itemPriceRef, createUse
         <div>
             <input type='number' ref={itemPriceRef} placeholder="Price" />
         </div>
-        <button onClick={createUser}>Add Item</button>
+        <button onClick={createItem}>Add Item</button>
     </div>
   )
 }

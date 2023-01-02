@@ -130,7 +130,7 @@
 }
 
 .itemComponent {
-  margin: 1rem;
+  margin: 4px;
   padding: 1rem;
   width: 8rem;
   height: 7rem;
@@ -146,12 +146,12 @@
 }
 .registerComponent__itemContainer {
   max-width: 650px;
-  border: 1px solid rgb(202, 197, 197);
-  border-radius: 0.5rem;
-  box-shadow:
+  /* border: 1px solid rgb(202, 197, 197);
+  border-radius: 0.5rem; */
+  /* box-shadow:
   1px 2px 2px hsl(220deg 60% 50% / 0.333),
   2px 4px 4px hsl(220deg 60% 50% / 0.333),
-  3px 6px 6px hsl(220deg 60% 50% / 0.333);
+  3px 6px 6px hsl(220deg 60% 50% / 0.333); */
   justify-content: center;
 }
 .addItemsComponent {
