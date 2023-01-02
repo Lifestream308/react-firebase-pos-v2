@@ -283,7 +283,7 @@
 
 
 
-/* this classname used in findTotal() as a query selector. Fix later */
+/* this classname used in findTotal function as a query selector. Fix later */
 .amount {
   width: 6rem;
 }

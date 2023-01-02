@@ -169,6 +169,11 @@ function App() {
   const prices = () => window.document.querySelectorAll('.price')
   const amounts = () => window.document.querySelectorAll('.amount')
 
+  // const handleTotal = (itemName, e) => {
+  //   findTotal(itemName, e)
+
+  // }
+
   const findTotal = (itemName, e) => {
     let totalCost = 0
     for (let i = 0; i < prices().length; i++) {
