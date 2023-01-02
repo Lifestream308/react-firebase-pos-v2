@@ -151,8 +151,7 @@ function App() {
 
   const location = useLocation()
   useEffect(() => {
-    setTotal(0)
-    setTotalItems(0)
+    setCartList({})
   }, [user, location.pathname])
   // End of Firebase CRUD - Create, Update, Delete, Read Register Items
 
@@ -161,42 +160,41 @@ function App() {
   const [totalItems, setTotalItems] = useState(0)
   const [cartList, setCartList] = useState({})
   
-  const prices = () => window.document.querySelectorAll('.price')
-  const amounts = () => window.document.querySelectorAll('.amount')
-  
-  const handleCartTotals = (itemName, e) => {
-      findTotal()
-      findTotalCartItems()
-      manageCartObject(itemName, e)
+  const handleCartTotals = (item, e) => {
+    manageCartObject(item, e)
     }
-    
-  // Calculate Total Price in Cart. Adds up the price of all items in the Register based on amount * price
-  const findTotal = () => {
-    let totalCost = 0
-    for (let i = 0; i < prices().length; i++) {
-      totalCost += Number(prices()[i].innerHTML) * amounts()[i].value
-    }
+
+  const manageCartObject = (item, e) => {
+    setCartList(prev => ({...prev, [item.menuItemName]: { amount : e.target.valueAsNumber, price : item.Price}}))
+  }
+
+  useEffect(() => {
+    let totalCost = 0 
+    for (let key in cartList) {
+      if (cartList[key].amount > 0) {
+        totalCost += cartList[key].amount * cartList[key].price
+      }
+    }    
     setTotal(totalCost)
-  }
+    console.log(cartList)
+  }, [cartList])
 
-  const manageCartObject = (itemName, e) => {
-    setCartList(prev => ({...prev, [itemName]: e.target.valueAsNumber}))
-  }
+  useEffect(() => {
+    let amountItems = 0 
+    for (let key in cartList) {
+      if (cartList[key].amount > 0) {
+        amountItems += cartList[key].amount
+      }
+    }    
+    setTotalItems(amountItems)
+  }, [cartList])
 
-  const resetTotal = () => {
+  const resetCart = () => {
     const amounts = () => window.document.querySelectorAll('.amount')
     amounts().forEach((amount) => amount.valueAsNumber = 0)
     setTotal(0)
     setTotalItems(0)
     setCartList({})
-  }
-
-  const findTotalCartItems = () => {
-    let amountItems = 0
-    for (let i = 0; i < amounts().length; i++) {
-      amountItems += amounts()[i].valueAsNumber
-    }
-    setTotalItems(amountItems)
   }
   // End of Cart Functions and Logic
 
@@ -211,7 +209,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetTotal={resetTotal} totalItems={totalItems} />
+              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>

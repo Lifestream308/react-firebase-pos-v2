@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemComponent from './ItemComponent'
 
-export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetTotal, totalItems }) {
+export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetCart, totalItems }) {
   return (
     <div className='registerComponent'>
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
@@ -16,7 +16,7 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
             <h2>Cart</h2>
             <span><i className="bi bi-cart3"></i> {totalItems}</span>
             <p>Total: $ { total }</p>
-            <button onClick={resetTotal}>Reset Cart</button>
+            <button onClick={resetCart}>Reset Cart</button>
           </div>
         </div>
     </div>

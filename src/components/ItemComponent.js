@@ -7,7 +7,7 @@ export default function ItemComponent({ item, handleCartTotals }) {
         <span>$</span>
         <span className='price'>{item.Price}</span>
         <br></br>
-        <input type='number' className='amount' onChange={e => handleCartTotals(item.menuItemName, e)} defaultValue='0' />
+        <input type='number' className='amount' onChange={e => handleCartTotals(item, e)} defaultValue='0' />
     </div>
   )
 }
