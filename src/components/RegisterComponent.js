@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemComponent from './ItemComponent'
 
-export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease }) {
+export default function RegisterComponent({ user, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease }) {
   return (
     <div className='registerComponent'>
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
@@ -17,6 +17,13 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
             <span><i className="bi bi-cart3"></i> {totalItems}</span>
             <p>Total: $ { total }</p>
             <button onClick={resetCart}>Reset Cart</button>
+            <br></br>
+            { cartList.filter(item=> item.amount>0).map(item => {
+              return ( 
+              <div key={item.name}>
+                <small>{ item.name } x { item.amount }</small>
+              </div> )
+            })}
           </div>
         </div>
     </div>

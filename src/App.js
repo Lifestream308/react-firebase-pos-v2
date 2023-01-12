@@ -147,22 +147,14 @@ function App() {
     let cartObject = [...cartList]
     let findItem = cartObject.find((index) => index.name === item.name)
     findItem.amount = e.target.valueAsNumber
-      // cartObject.forEach((index) => {
-      //   if (index.name === item.menuItemName) {
-      //     index.amount = e.target.valueAsNumber
-      //   }
-      // })    
     setCartList(cartObject)
     handleTotalCost()
     handleItemsInCart()
-    // console.log(cartObject)
     }
 
     // handle an array later. resets cart when url changes
   const location = useLocation()  
   useEffect(() => {
-    // let cartObject = cartList
-    // setCartList(cartObject)
     setTotal(0)
     setTotalItems(0)
 }, [user, location.pathname])
@@ -205,11 +197,6 @@ function App() {
   //       totalCost += index.amount * index.price
   //     }
   //   })
-  //   for (let key in cartList) {
-  //     if (cartList[key].amount > 0) {
-  //       totalCost += cartList[key].amount * cartList[key].price
-  //     }
-  //   }
   //   setTotal(totalCost)
   //   console.log(cartList111)
   // }, [cartList])
@@ -248,7 +235,7 @@ function App() {
   const itemDecrease = (item) => {
     let cartObject = [...cartList]
     let findIndex = cartObject.find(index => index.name === item.name)
-    findIndex.amount += -1
+    findIndex.amount --
     setCartList(cartObject)
     handleTotalCost()
     handleItemsInCart()
@@ -266,7 +253,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} />
+              <RegisterComponent user={user} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>
