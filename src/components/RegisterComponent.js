@@ -1,15 +1,15 @@
 import React from 'react'
 import ItemComponent from './ItemComponent'
 
-export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetCart, totalItems }) {
+export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease }) {
   return (
     <div className='registerComponent'>
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
         <div className='flex spaceAround'>
           <div className='flex wrap registerComponent__itemContainer'>
-            { firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email).length===0 && <h2 className='registerComponent__title'>Add Items to your Register below!</h2> }
-          {user && firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email).map(item => { 
-            return <ItemComponent key={item.menuItemName} item={item} handleCartTotals={handleCartTotals} />
+            { cartList.length === 0 && <h2 className='registerComponent__title'>Add Items to your Register below!</h2> }
+          {user && cartList.map(item => { 
+            return <ItemComponent key={item.name} item={item} handleCartTotals={handleCartTotals} itemIncrease={itemIncrease} itemDecrease={itemDecrease} />
           })}
           </div>
           <div className='registerComponent__checkout'>

@@ -75,6 +75,12 @@ function App() {
   const [firebaseItemsDB, setFirebaseItemsDB] = useState([])
   const usersCollectionRef = collection(db, "users")
 
+  const getUsers = async () => {
+    const data = await getDocs(usersCollectionRef);
+    let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    setFirebaseItemsDB(firebaseArray);
+  }
+
   const createItem = async () => {
     const filteredItems = firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email)
     const filteredNames = Array.from(filteredItems, a => a.menuItemName)
@@ -100,11 +106,6 @@ function App() {
       return
     }
     await addDoc(usersCollectionRef, {menuItemName: itemNameRef.current.value.trim(), Price: itemPriceRef.current.valueAsNumber, companyEmail: user.email})
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setFirebaseItemsDB(firebaseArray);
-    }
     getUsers()
   }
 
@@ -120,11 +121,6 @@ function App() {
     const userDoc = doc(db, "users", id)
     const newFields = { Price: price }
     await updateDoc(userDoc, newFields)
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setFirebaseItemsDB(firebaseArray);
-    }
     getUsers()
     alert("Price Updated")
   }
@@ -132,69 +128,130 @@ function App() {
   const deleteUser = async(id) => {
     const userDoc = doc(db, "users", id)
     await deleteDoc(userDoc)
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setFirebaseItemsDB(firebaseArray);
-    }
     getUsers()
   }
 
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setFirebaseItemsDB(firebaseArray);
-    }
     getUsers()
   }, [])
-
-  const location = useLocation()
-  useEffect(() => {
-    setCartList({})
-  }, [user, location.pathname])
   // End of Firebase CRUD - Create, Update, Delete, Read Register Items
 
+
   // Cart Functions and Logic
+
+  const [cartList, setCartList] = useState([])
   const [total, setTotal] = useState(0)
   const [totalItems, setTotalItems] = useState(0)
-  const [cartList, setCartList] = useState({})
   
   const handleCartTotals = (item, e) => {
-    manageCartObject(item, e)
+    let cartObject = [...cartList]
+    let findItem = cartObject.find((index) => index.name === item.name)
+    findItem.amount = e.target.valueAsNumber
+      // cartObject.forEach((index) => {
+      //   if (index.name === item.menuItemName) {
+      //     index.amount = e.target.valueAsNumber
+      //   }
+      // })    
+    setCartList(cartObject)
+    handleTotalCost()
+    handleItemsInCart()
+    // console.log(cartObject)
     }
 
-  const manageCartObject = (item, e) => {
-    setCartList(prev => ({...prev, [item.menuItemName]: { amount : e.target.valueAsNumber, price : item.Price}}))
-  }
-
+    // handle an array later. resets cart when url changes
+  const location = useLocation()  
   useEffect(() => {
-    let totalCost = 0 
-    for (let key in cartList) {
-      if (cartList[key].amount > 0) {
-        totalCost += cartList[key].amount * cartList[key].price
-      }
-    }    
-    setTotal(totalCost)
-    console.log(cartList)
-  }, [cartList])
-
-  useEffect(() => {
-    let amountItems = 0 
-    for (let key in cartList) {
-      if (cartList[key].amount > 0) {
-        amountItems += cartList[key].amount
-      }
-    }    
-    setTotalItems(amountItems)
-  }, [cartList])
-
-  const resetCart = () => {
-    const amounts = () => window.document.querySelectorAll('.amount')
-    amounts().forEach((amount) => amount.valueAsNumber = 0)
+    // let cartObject = cartList
+    // setCartList(cartObject)
     setTotal(0)
     setTotalItems(0)
-    setCartList({})
+}, [user, location.pathname])
+
+  useEffect(() => {
+    if (user) {
+      let filterArray = firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email)
+      let cartObject = []
+      filterArray.forEach(item => {
+        cartObject.push({ name: item.menuItemName, amount : 0, price : item.Price, id: item.id })
+      })
+      setCartList(cartObject)
+  }
+  }, [firebaseItemsDB])
+
+  const handleTotalCost = () => {
+    let totalCost = 0 
+    cartList.forEach((index) => {
+      if (index.amount > 0) {
+        totalCost += index.amount * index.price
+      }
+    })
+    setTotal(totalCost)
+  }
+
+  const handleItemsInCart = () => {
+    let totalItemsInCart = 0 
+    cartList.forEach((index) => {
+      if (index.amount > 0) {
+        totalItemsInCart += index.amount
+      }
+    })
+    setTotalItems(totalItemsInCart)
+  }
+
+  // useEffect(() => {
+  //   let totalCost = 0 
+  //   cartList.forEach((index) => {
+  //     if (index.amount > 0) {
+  //       totalCost += index.amount * index.price
+  //     }
+  //   })
+  //   for (let key in cartList) {
+  //     if (cartList[key].amount > 0) {
+  //       totalCost += cartList[key].amount * cartList[key].price
+  //     }
+  //   }
+  //   setTotal(totalCost)
+  //   console.log(cartList111)
+  // }, [cartList])
+
+  // handle an array items in Cart
+  // useEffect(() => {
+  //   let amountItems = 0 
+  //   for (let key in cartList) {
+  //     if (cartList[key].amount > 0) {
+  //       amountItems += cartList[key].amount
+  //     }
+  //   }    
+  //   setTotalItems(amountItems)
+  // }, [cartList])
+
+  const resetCart = () => {
+    let cartObject = [...cartList]
+    cartObject.forEach((index) => {
+      index.amount = 0
+    })
+    setCartList(cartObject)
+    handleTotalCost()
+    handleItemsInCart()
+    // console.log(cartObject)
+  }
+
+  const itemIncrease = (item) => {
+    let cartObject = [...cartList]
+    let findIndex = cartObject.find(index => index.name === item.name)
+    findIndex.amount ++
+    setCartList(cartObject)
+    handleTotalCost()
+    handleItemsInCart()
+  }
+
+  const itemDecrease = (item) => {
+    let cartObject = [...cartList]
+    let findIndex = cartObject.find(index => index.name === item.name)
+    findIndex.amount += -1
+    setCartList(cartObject)
+    handleTotalCost()
+    handleItemsInCart()
   }
   // End of Cart Functions and Logic
 
@@ -209,7 +266,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} />
+              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>
