@@ -74,6 +74,7 @@ function App() {
   
   const [firebaseItemsDB, setFirebaseItemsDB] = useState([])
   const usersCollectionRef = collection(db, "users")
+  // const historyCollectionRef = collection(db, "saleHistory")
 
   const getUsers = async () => {
     const data = await getDocs(usersCollectionRef);
@@ -177,7 +178,7 @@ function App() {
         totalCost += index.amount * index.price
       }
     })
-    setTotal(totalCost)
+    setTotal(totalCost.toFixed(2))
   }
 
   const handleItemsInCart = () => {

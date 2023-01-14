@@ -18,12 +18,13 @@ export default function RegisterComponent({ user, handleCartTotals, total, reset
             <p>Total: $ { total }</p>
             <button onClick={resetCart}>Reset Cart</button>
             <br></br>
-            { cartList.filter(item=> item.amount>0).map(item => {
+            { cartList.filter(item=> item.amount > 0).map(item => {
               return ( 
               <div key={item.name}>
-                <small>{ item.name } x { item.amount }</small>
+                <small>${ item.price} { item.name } x{ item.amount }</small>
               </div> )
             })}
+            {/* { cartList.filter(item=> item.amount > 0).length > 0 && <button>Checkout</button> } */}
           </div>
         </div>
     </div>
