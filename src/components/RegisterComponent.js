@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemComponent from './ItemComponent'
 
-export default function RegisterComponent({ user, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease }) {
+export default function RegisterComponent({ user, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease, cash, handleCash }) {
   return (
     <div className='registerComponent'>
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
@@ -13,26 +13,37 @@ export default function RegisterComponent({ user, handleCartTotals, total, reset
           })}
           </div>
           <div className='registerComponent__checkout'>
-            <h2>Cart</h2>
-            <span><i className="bi bi-cart3"></i> {totalItems}</span>
-            <p>Total: $ { total }</p>
-            <button onClick={resetCart}>Reset Cart</button>
-            <br></br>
-            { cartList.filter(item=> item.amount > 0).map(item => {
-              return ( 
-              <div key={item.name}>
-                <small>${ item.price} { item.name } x{ item.amount }</small>
-              </div> )
-            })}
-            { cartList.filter(item=> item.amount > 0).length > 0 && 
             <div>
-              <label>Cash Received: </label>
-              <input type="number" defaultValue="0"></input>
-              <br></br>
-              <label>Change: </label>
-              <input type="number" defaultValue="0"></input>
-            </div> }
-            {/* { cartList.filter(item=> item.amount > 0).length > 0 && <button>Checkout</button> } */}
+              <h2>Cart</h2>
+              <span><i className="bi bi-cart3"></i> {totalItems}</span>
+              <p>Total: $ { total }</p>
+              <button onClick={resetCart}>Reset Cart</button>
+            </div>
+            <div>
+              { cartList.filter(item=> item.amount > 0).map(item => {
+                return ( 
+                <div key={item.name}>
+                  <small>${ item.price} { item.name } x{ item.amount }</small>
+                </div> )
+              })}
+            </div>
+            <div>
+              { cartList.filter(item=> item.amount > 0).length > 0 && 
+              <div className='registerComponent__cashContainer'>
+                <label>Cash Payment:</label>
+                <br/>
+                <span>$ </span>
+                <input className='registerComponent__input' onChange={ (e) => handleCash(e)} type="number" value={ cash }></input>
+              </div> }
+            </div>
+            <div>
+              { cash - total >= 0 && cartList.filter(item=> item.amount > 0).length > 0 &&
+              <div className='registerComponent__changeContainer'>
+                <span>Change is $ </span>
+                <span className='registerComponent__span'>{ (cash - total).toFixed(2) }</span>
+              {/* { cartList.filter(item=> item.amount > 0).length > 0 && <button>Checkout</button> } */}
+              </div> }
+            </div>
           </div>
         </div>
     </div>

@@ -158,13 +158,14 @@
 }
 .registerComponent__itemContainer {
   max-width: 650px;
-  /* border: 1px solid rgb(202, 197, 197);
-  border-radius: 0.5rem; */
-  /* box-shadow:
-  1px 2px 2px hsl(220deg 60% 50% / 0.333),
-  2px 4px 4px hsl(220deg 60% 50% / 0.333),
-  3px 6px 6px hsl(220deg 60% 50% / 0.333); */
   justify-content: center;
+  align-content: flex-start;
+}
+.registerComponent__cashContainer {
+  margin: 1rem;
+}
+.registerComponent__changeContainer {
+  margin: 1rem;
 }
 .addItemsComponent {
   max-width: 950px;
@@ -225,6 +226,14 @@
   cursor: pointer;
   opacity: .9;
 }
+.registerComponent__input {
+  width: 4rem;
+  text-align: center;
+}
+.registerComponent__span {
+  width: 2.5rem;
+}
+
 .updateComponent {
   max-width: 950px;
 }

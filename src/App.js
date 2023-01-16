@@ -143,6 +143,8 @@ function App() {
   const [cartList, setCartList] = useState([])
   const [total, setTotal] = useState(0)
   const [totalItems, setTotalItems] = useState(0)
+  const [cash, setCash] = useState(0)
+
   
   const handleCartTotals = (item, e) => {
     let cartObject = [...cartList]
@@ -199,6 +201,7 @@ function App() {
     setCartList(cartObject)
     handleTotalCost()
     handleItemsInCart()
+    setCash(0)
   }
 
   const itemIncrease = (item) => {
@@ -218,6 +221,14 @@ function App() {
     handleTotalCost()
     handleItemsInCart()
   }
+
+  const handleCash = (e) => {
+    // let money = 0
+    // if (e.target.valueAsNumber > 0) {
+    //   money = e.target.valueAsNumber
+    // }
+    setCash(e.target.value)
+  }
   // End of Cart Functions and Logic
 
   return (
@@ -231,7 +242,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} />
+              <RegisterComponent user={user} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} cash={cash} handleCash={handleCash} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>
