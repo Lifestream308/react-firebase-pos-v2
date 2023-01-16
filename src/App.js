@@ -242,7 +242,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} cash={cash} handleCash={handleCash} />
+              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} cash={cash} handleCash={handleCash} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>
