@@ -153,11 +153,10 @@ function App() {
     handleItemsInCart()
     }
 
-    // handle an array later. resets cart when url changes
+    // handle an array later. resets cart when url changes. If user changes, need a new filtered Items list
   const location = useLocation()  
   useEffect(() => {
-    setTotal(0)
-    setTotalItems(0)
+    resetCart()
 }, [user, location.pathname])
 
   useEffect(() => {
@@ -168,8 +167,9 @@ function App() {
         cartObject.push({ name: item.menuItemName, amount : 0, price : item.Price, id: item.id })
       })
       setCartList(cartObject)
+      handleTotalCost()
   }
-  }, [firebaseItemsDB])
+  }, [firebaseItemsDB, user])
 
   const handleTotalCost = () => {
     let totalCost = 0 
@@ -191,28 +191,6 @@ function App() {
     setTotalItems(totalItemsInCart)
   }
 
-  // useEffect(() => {
-  //   let totalCost = 0 
-  //   cartList.forEach((index) => {
-  //     if (index.amount > 0) {
-  //       totalCost += index.amount * index.price
-  //     }
-  //   })
-  //   setTotal(totalCost)
-  //   console.log(cartList111)
-  // }, [cartList])
-
-  // handle an array items in Cart
-  // useEffect(() => {
-  //   let amountItems = 0 
-  //   for (let key in cartList) {
-  //     if (cartList[key].amount > 0) {
-  //       amountItems += cartList[key].amount
-  //     }
-  //   }    
-  //   setTotalItems(amountItems)
-  // }, [cartList])
-
   const resetCart = () => {
     let cartObject = [...cartList]
     cartObject.forEach((index) => {
@@ -221,7 +199,6 @@ function App() {
     setCartList(cartObject)
     handleTotalCost()
     handleItemsInCart()
-    // console.log(cartObject)
   }
 
   const itemIncrease = (item) => {

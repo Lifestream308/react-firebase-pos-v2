@@ -24,6 +24,14 @@ export default function RegisterComponent({ user, handleCartTotals, total, reset
                 <small>${ item.price} { item.name } x{ item.amount }</small>
               </div> )
             })}
+            { cartList.filter(item=> item.amount > 0).length > 0 && 
+            <div>
+              <label>Cash Received: </label>
+              <input type="number" defaultValue="0"></input>
+              <br></br>
+              <label>Change: </label>
+              <input type="number" defaultValue="0"></input>
+            </div> }
             {/* { cartList.filter(item=> item.amount > 0).length > 0 && <button>Checkout</button> } */}
           </div>
         </div>
