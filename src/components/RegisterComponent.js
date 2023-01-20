@@ -7,7 +7,7 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
         <div className='flex spaceAround'>
           <div className='flex wrap registerComponent__itemContainer'>
-            { cartList.length === 0 && <h2 className='registerComponent__title'>{ firebaseItemsDB ? "Add Items to your Register below!" : "Loading..."}</h2> }
+            { cartList.length === 0 && <h2 className='registerComponent__title'>{ firebaseItemsDB ? "Add Items to your Register below!" : "Loading..." }</h2> }
           {user && cartList.map(item => { 
             return <ItemComponent key={item.name} item={item} handleCartTotals={handleCartTotals} itemIncrease={itemIncrease} itemDecrease={itemDecrease} />
           })}

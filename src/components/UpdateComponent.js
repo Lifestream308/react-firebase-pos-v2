@@ -6,7 +6,7 @@ export default function UpdateComponent({ user, firebaseItemsDB, updateItem, del
   return (
     <div className='updateComponent'>
         <Link to='/'>Back to Home when Done</Link>
-        <p>UpdateComponent</p>
+        <h2>Update</h2>
         <div className='updateComponent__itemMap'>
             {user && firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email).map(item => { 
                 return <UpdateItemComponent key={item.menuItemName} item={item} updateItem={updateItem} deleteUser={deleteUser} itemPriceRef={itemPriceRef} />

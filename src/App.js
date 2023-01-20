@@ -14,8 +14,11 @@ function App() {
 
   // Firebase Create/Register User, Login User, Guest Login, Logout User
   const [user, setUser] = useState({})
-  const emailRef = useRef()
-  const passwordRef = useRef()
+
+  const credentials = {
+    emailRef : useRef(),
+    passwordRef : useRef()
+  }
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -27,8 +30,8 @@ function App() {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
-        emailRef.current.value,
-        passwordRef.current.value
+        credentials.emailRef.current.value,
+        credentials.passwordRef.current.value
       )
       console.log(user)
     } catch (error) {
@@ -40,8 +43,8 @@ function App() {
     try {
       const user = await signInWithEmailAndPassword(
         auth,
-        emailRef.current.value,
-        passwordRef.current.value
+        credentials.emailRef.current.value,
+        credentials.passwordRef.current.value
       )
     } catch (error) {
       console.log(error.message)
@@ -223,10 +226,6 @@ function App() {
   }
 
   const handleCash = (e) => {
-    // let money = 0
-    // if (e.target.valueAsNumber > 0) {
-    //   money = e.target.valueAsNumber
-    // }
     setCash(e.target.value)
   }
   // End of Cart Functions and Logic
@@ -235,7 +234,7 @@ function App() {
     <div className="App">
       <div className="App">
 
-        { !user && <LoginComponent emailRef={emailRef} passwordRef={passwordRef} login={login} register={register} guestLogin={guestLogin} /> }
+        { !user && <LoginComponent credentials={credentials} login={login} register={register} guestLogin={guestLogin} /> }
 
         { user && <UserComponent logout={logout} user={user} /> }
 
