@@ -9,6 +9,8 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import AddItemsComponent from './components/AddItemsComponent';
 import RegisterComponent from './components/RegisterComponent';
 import UpdateComponent from './components/UpdateComponent';
+import AboutComponent from './components/AboutComponent';
+import HistoryComponent from './components/HistoryComponent';
 
 function App() {
 
@@ -71,7 +73,7 @@ function App() {
   // End of Firebase Register/Login/GuestLogin/Logout
 
 
-  // Firebase CRUD - Create, Update, Delete, Read Register Items
+  // Firebase Items CRUD - Create, Update, Delete, Read Register Items
   const itemNameRef = useRef()
   const itemPriceRef = useRef()
   
@@ -138,7 +140,52 @@ function App() {
   useEffect(() => {
     getUsers()
   }, [])
-  // End of Firebase CRUD - Create, Update, Delete, Read Register Items
+  // End of Firebase Items CRUD - Create, Update, Delete, Read Register Items
+
+  // Firebase History CRUD - Create, Update, Delete, Read Sales History
+  const [firebaseHistoryDB, setFirebaseHistoryDB] = useState([])
+  const historyCollectionRef = collection(db, "saleHistory")
+
+  const getHistory = async () => {
+    const data = await getDocs(historyCollectionRef);
+    let firebaseArray = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    setFirebaseHistoryDB(firebaseArray);
+  }
+
+  const createSaleHistory = async () => {
+    const filteredItems = firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email)
+    const filteredNames = Array.from(filteredItems, a => a.menuItemName)
+
+    await addDoc(historyCollectionRef, {menuItemName: itemNameRef.current.value.trim(), Price: itemPriceRef.current.valueAsNumber, companyEmail: user.email})
+    getHistory()
+  }
+
+  const updateHistory = async (id, price) => {
+    if (price <= 0 || price >= 1000) {
+      alert("Price must be between 0-1000")
+      return
+    }
+    if (isNaN(price)) {
+      alert("Price must be between 0-1000")
+      return
+    }
+    const userDoc = doc(db, "saleHistory", id)
+    const newFields = { Price: price }
+    await updateDoc(userDoc, newFields)
+    getHistory()
+    alert("Price Updated")
+  }
+
+  const deleteHistory = async(id) => {
+    const userDoc = doc(db, "saleHistory", id)
+    await deleteDoc(userDoc)
+    getHistory()
+  }
+
+  useEffect(() => {
+    getHistory()
+  }, [])
+  // End of Firebase History CRUD - Create, Update, Delete, Read Sale History
 
 
   // Cart Functions and Logic
@@ -247,6 +294,12 @@ function App() {
           </Route>
           <Route path='/update' element={ user && 
             <UpdateComponent user={user} firebaseItemsDB={firebaseItemsDB} updateItem={updateItem} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
+          </Route>
+          <Route path='/about' element={ user && 
+            <AboutComponent user={user} firebaseItemsDB={firebaseItemsDB} /> }>
+          </Route>
+          <Route path='/history' element={ user && 
+            <HistoryComponent user={user} firebaseHistoryDB={firebaseHistoryDB} /> }>
           </Route>
         </Routes>
       </div>
