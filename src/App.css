@@ -29,7 +29,7 @@
   text-align: center;
 }
 
-/* Custom Configurations */
+/* loginComponent */
 .loginComponent {
   align-items: center;
   height: 85vh;
@@ -95,6 +95,7 @@
 }
 .loginComponent__inputCard hr {color: rgb(224, 215, 215);}
 
+/* userComponent */
 .userComponent__nav {
   display: flex;
   height: 4rem;
@@ -129,6 +130,7 @@
   color: rgb(44, 44, 217);
 }
 
+/* itemComponent */
 .itemComponent {
   margin: 4px;
   padding: 8px 4px;
@@ -150,6 +152,7 @@
   border: none;
 }
 
+/* registerComponent */
 .registerComponent {
   max-width: 950px;
 }
@@ -167,6 +170,50 @@
 .registerComponent__changeContainer {
   margin: 1rem;
 }
+.registerComponent__changeContainerButton1 {
+  margin-top: 1rem;
+  color: white;
+  background-color: rgb(122, 200, 6);
+}
+
+.registerComponent__checkout {
+  min-width: 10rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.5rem;
+  box-shadow:
+  1px 2px 2px hsl(220deg 60% 50% / 0.333),
+  2px 4px 4px hsl(220deg 60% 50% / 0.333),
+  3px 6px 6px hsl(220deg 60% 50% / 0.333);
+}
+.registerComponent__checkout h2 {
+  color: rgb(44, 44, 217);
+}
+.registerComponent__checkout span {
+  color: rgb(26, 147, 11);
+}
+.registerComponent__checkout button {
+  margin-bottom: 1rem;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+}
+.registerComponent__checkoutButton1 {
+  color: white;
+  background-color: lightslategray;
+}
+.registerComponent__checkout button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
+.registerComponent__input {
+  width: 4rem;
+  text-align: center;
+}
+.registerComponent__span {
+  width: 2.5rem;
+}
+
+/* addItemsComponent */
 .addItemsComponent {
   max-width: 950px;
   margin-top: 4rem;
@@ -198,42 +245,7 @@
   font-size: 120%;
 }
 
-.registerComponent__checkout {
-  min-width: 10rem;
-  border: 1px solid lightgrey;
-  border-radius: 0.5rem;
-  box-shadow:
-  1px 2px 2px hsl(220deg 60% 50% / 0.333),
-  2px 4px 4px hsl(220deg 60% 50% / 0.333),
-  3px 6px 6px hsl(220deg 60% 50% / 0.333);
-}
-.registerComponent__checkout h2 {
-  color: rgb(44, 44, 217);
-}
-.registerComponent__checkout span {
-  color: rgb(26, 147, 11);
-  margin-bottom: 1rem;
-}
-.registerComponent__checkout button {
-  color: white;
-  margin-bottom: 1rem;
-  padding: 8px;
-  border: none;
-  border-radius: 8px;
-  background-color: lightslategray;
-}
-.registerComponent__checkout button:hover {
-  cursor: pointer;
-  opacity: .9;
-}
-.registerComponent__input {
-  width: 4rem;
-  text-align: center;
-}
-.registerComponent__span {
-  width: 2.5rem;
-}
-
+/* updateComponent */
 .updateComponent {
   max-width: 950px;
 }
@@ -247,6 +259,8 @@
   2px 4px 4px hsl(220deg 60% 50% / 0.333),
   3px 6px 6px hsl(220deg 60% 50% / 0.333);
 }
+
+/* updateItemComponent */
 .updateItemComponent {
   margin: 1rem;
   padding: 1rem;

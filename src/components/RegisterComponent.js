@@ -17,7 +17,7 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
               <h2>Cart</h2>
               <span><i className="bi bi-cart3"></i> {totalItems}</span>
               <p>Total: $ { total }</p>
-              <button onClick={resetCart}>Reset Cart</button>
+              <button className='registerComponent__checkoutButton1' onClick={resetCart}>Reset Cart</button>
             </div>
             <div>
               { cartList.filter(item=> item.amount > 0).map(item => {
@@ -41,7 +41,8 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
               <div className='registerComponent__changeContainer'>
                 <span>Change is $ </span>
                 <span className='registerComponent__span'>{ (cash - total).toFixed(2) }</span>
-              {/* { cartList.filter(item=> item.amount > 0).length > 0 && <button>Checkout</button> } */}
+                <br></br>
+                {/* <button className='registerComponent__changeContainerButton1' onClick={()=>console.log('Hi')}>Add to History</button> */}
               </div> }
             </div>
           </div>
