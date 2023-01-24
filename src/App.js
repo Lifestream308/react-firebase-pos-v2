@@ -11,6 +11,7 @@ import RegisterComponent from './components/RegisterComponent';
 import UpdateComponent from './components/UpdateComponent';
 import AboutComponent from './components/AboutComponent';
 import HistoryComponent from './components/HistoryComponent';
+import { async } from '@firebase/util';
 
 function App() {
 
@@ -142,9 +143,26 @@ function App() {
   }, [])
   // End of Firebase Items CRUD - Create, Update, Delete, Read Register Items
 
-  // Firebase History CRUD - Create, Update, Delete, Read Sales History
+  // Firebase History CRUD - Create, Delete, Read Sales History
   const [firebaseHistoryDB, setFirebaseHistoryDB] = useState([])
   const historyCollectionRef = collection(db, "saleHistory")
+  const [sortedHistory, setSortedHistory] = useState([])
+
+  // let filteredHistory1 = firebaseHistoryDB.filter(saleEntry => saleEntry.companyEmail === user.email)
+  // let sortedHistory11 = filteredHistory1.sort((a, b) => a.postID - b.postID)
+
+  useEffect(() => {
+    if (user && firebaseHistoryDB) {
+      // let cartObject = []
+      let filterArray = firebaseHistoryDB.filter(saleEntry => saleEntry.companyEmail === user.email)
+      let sortedArray = filterArray.sort((a, b) => a.postID - b.postID)
+
+      // filterArray.forEach(item => {
+      //   cartObject.push({ name: item.menuItemName, amount : 0, price : item.Price, id: item.id })
+      // })
+      setSortedHistory(sortedArray)
+  }
+  }, [firebaseHistoryDB, user])
 
   const getHistory = async () => {
     const data = await getDocs(historyCollectionRef);
@@ -153,33 +171,28 @@ function App() {
   }
 
   const createSaleHistory = async () => {
-    const filteredItems = firebaseItemsDB.filter(registerItem => registerItem.companyEmail === user.email)
-    const filteredNames = Array.from(filteredItems, a => a.menuItemName)
+    let filteredHistory = firebaseHistoryDB.filter(saleEntry => saleEntry.companyEmail === user.email)
+    let sortedHistory = filteredHistory.sort((a, b) => a.postID - b.postID)
 
-    await addDoc(historyCollectionRef, {menuItemName: itemNameRef.current.value.trim(), Price: itemPriceRef.current.valueAsNumber, companyEmail: user.email})
-    getHistory()
-  }
-
-  const updateHistory = async (id, price) => {
-    if (price <= 0 || price >= 1000) {
-      alert("Price must be between 0-1000")
-      return
+    await addDoc(historyCollectionRef, {
+      companyEmail: user.email, 
+      postID: sortedHistory.length > 0 ? sortedHistory[sortedHistory.length-1].postID + 1 : 1,
+      sale: JSON.stringify(checkoutCartList),
+      saleTotal: total,
+      totalItems: totalItems, 
+      cashReceived: cash
+    })
+    if (sortedHistory.length >= 10) {
+      deleteHistory(sortedHistory[0].id)
     }
-    if (isNaN(price)) {
-      alert("Price must be between 0-1000")
-      return
-    }
-    const userDoc = doc(db, "saleHistory", id)
-    const newFields = { Price: price }
-    await updateDoc(userDoc, newFields)
     getHistory()
-    alert("Price Updated")
+    resetCart()
+    alert("Sale Completed and Added to History")
   }
 
   const deleteHistory = async(id) => {
     const userDoc = doc(db, "saleHistory", id)
     await deleteDoc(userDoc)
-    getHistory()
   }
 
   useEffect(() => {
@@ -195,6 +208,7 @@ function App() {
   const [totalItems, setTotalItems] = useState(0)
   const [cash, setCash] = useState(0)
 
+  let checkoutCartList = cartList.filter(item=> item.amount > 0)
   
   const handleCartTotals = (item, e) => {
     let cartObject = [...cartList]
@@ -288,7 +302,7 @@ function App() {
         <Routes>
           <Route path='/' element={ user && 
             <>
-              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} cash={cash} handleCash={handleCash} />
+              <RegisterComponent user={user} firebaseItemsDB={firebaseItemsDB} handleCartTotals={handleCartTotals} total={total} resetCart={resetCart} totalItems={totalItems} cartList={cartList} itemIncrease={itemIncrease} itemDecrease={itemDecrease} cash={cash} handleCash={handleCash} checkoutCartList={checkoutCartList} createSaleHistory={createSaleHistory} />
               <AddItemsComponent itemNameRef={itemNameRef} itemPriceRef={itemPriceRef} createItem={createItem} />
             </> }>              
           </Route>
@@ -299,7 +313,7 @@ function App() {
             <AboutComponent user={user} firebaseItemsDB={firebaseItemsDB} /> }>
           </Route>
           <Route path='/history' element={ user && 
-            <HistoryComponent user={user} firebaseHistoryDB={firebaseHistoryDB} /> }>
+            <HistoryComponent user={user} firebaseHistoryDB={firebaseHistoryDB} sortedHistory={sortedHistory} /> }>
           </Route>
         </Routes>
       </div>

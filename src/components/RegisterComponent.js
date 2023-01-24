@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemComponent from './ItemComponent'
 
-export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease, cash, handleCash }) {
+export default function RegisterComponent({ user, firebaseItemsDB, handleCartTotals, total, resetCart, totalItems, cartList, itemIncrease, itemDecrease, cash, handleCash, checkoutCartList, createSaleHistory }) {
   return (
     <div className='registerComponent'>
         <h2 className='registerComponent__title'>Your Register Cloud</h2>
@@ -20,7 +20,7 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
               <button className='registerComponent__checkoutButton1' onClick={resetCart}>Reset Cart</button>
             </div>
             <div>
-              { cartList.filter(item=> item.amount > 0).map(item => {
+              { checkoutCartList.map(item => {
                 return ( 
                 <div key={item.name}>
                   <small>${ item.price} { item.name } x{ item.amount }</small>
@@ -28,7 +28,7 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
               })}
             </div>
             <div>
-              { cartList.filter(item=> item.amount > 0).length > 0 && 
+              { checkoutCartList.length > 0 && 
               <div className='registerComponent__cashContainer'>
                 <label>Cash Payment:</label>
                 <br/>
@@ -37,12 +37,12 @@ export default function RegisterComponent({ user, firebaseItemsDB, handleCartTot
               </div> }
             </div>
             <div>
-              { cash - total >= 0 && cartList.filter(item=> item.amount > 0).length > 0 &&
+              { cash - total >= 0 && checkoutCartList.length > 0 &&
               <div className='registerComponent__changeContainer'>
                 <span>Change is $ </span>
                 <span className='registerComponent__span'>{ (cash - total).toFixed(2) }</span>
                 <br></br>
-                {/* <button className='registerComponent__changeContainerButton1' onClick={()=>console.log('Hi')}>Add to History</button> */}
+                <button className='registerComponent__changeContainerButton1' onClick={ ()=> createSaleHistory()}>Add to History</button>
               </div> }
             </div>
           </div>

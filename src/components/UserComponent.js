@@ -8,6 +8,7 @@ export default function UserComponent({logout, user}) {
         <h1><Link className='userComponent__link2' to='/'>Register Cloud</Link></h1>
         <span>
           <Link className='userComponent__link' to='/update'>Update</Link>
+          <Link className='userComponent__link' to='/history'>History</Link>
           <Link className='userComponent__link userComponent__linkColor1' to='/' onClick={logout}>Logout</Link>
         </span>
       </nav>
