@@ -280,6 +280,7 @@ function App() {
   const itemDecrease = (item) => {
     let cartObject = [...cartList]
     let findIndex = cartObject.find(index => index.name === item.name)
+    if (findIndex.amount <= 0) return
     findIndex.amount --
     setCartList(cartObject)
     handleTotalCost()

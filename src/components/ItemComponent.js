@@ -9,7 +9,7 @@ export default function ItemComponent({ item, handleCartTotals, itemIncrease, it
         <br></br>
         <br></br>
         <div className='flex'>
-          <button className='itemComponent__button1' onClick={()=> itemDecrease(item)}><i className="bi bi-dash-square"></i></button>
+          <button className='itemComponent__button1' style={{opacity: item.amount <= 0 ? .4 : 1}} onClick={()=> itemDecrease(item)}><i className="bi bi-dash-square"></i></button>
           <input type='number' className='amount itemComponent__input' onChange={e => handleCartTotals(item, e)} value={item.amount} />
           <button className='itemComponent__button1' onClick={()=> itemIncrease(item)}><i className="bi bi-plus-square"></i></button>
         </div>
