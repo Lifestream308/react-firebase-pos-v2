@@ -148,14 +148,11 @@ function App() {
   const historyCollectionRef = collection(db, "saleHistory")
   const [sortedHistory, setSortedHistory] = useState([])
 
-  // let filteredHistory1 = firebaseHistoryDB.filter(saleEntry => saleEntry.companyEmail === user.email)
-  // let sortedHistory11 = filteredHistory1.sort((a, b) => a.postID - b.postID)
-
   useEffect(() => {
     if (user && firebaseHistoryDB) {
       // let cartObject = []
       let filterArray = firebaseHistoryDB.filter(saleEntry => saleEntry.companyEmail === user.email)
-      let sortedArray = filterArray.sort((a, b) => a.postID - b.postID)
+      let sortedArray = filterArray.sort((a, b) => b.postID - a.postID)
 
       // filterArray.forEach(item => {
       //   cartObject.push({ name: item.menuItemName, amount : 0, price : item.Price, id: item.id })

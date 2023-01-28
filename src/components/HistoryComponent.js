@@ -4,6 +4,8 @@ export default function HistoryComponent({firebaseHistoryDB, sortedHistory}) {
   return (
     <div>
         <div>History Component</div>
+        <br/>
+        <small>Sorted newest to oldest</small>
         <hr/>
         { sortedHistory.length === 0 && <p>Sell some items first and then the sale will appear here!</p>}
         { sortedHistory.length>0 && sortedHistory.map((saleEntry) => {
