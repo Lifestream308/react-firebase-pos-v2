@@ -1,11 +1,16 @@
 import React from 'react'
 
-export default function HistoryComponent({firebaseHistoryDB, sortedHistory}) {
+export default function HistoryComponent({firebaseHistoryDB, sortedHistory, sortFunctions}) {
   return (
     <div>
         <div>History Component</div>
         <br/>
-        <small>Sorted newest to oldest</small>
+        {/* <small>Sorted newest to oldest</small> */}
+        <label for='sort'>Sort </label>
+        <select name='sort' id='sort' onChange={(e)=> sortFunctions[e.target.value]()}>
+          <option value='newToOld'>Newest to Oldest</option>
+          <option value='oldToNew'>Oldest to Newest</option>
+        </select>
         <hr/>
         { sortedHistory.length === 0 && <p>Sell some items first and then the sale will appear here!</p>}
         { sortedHistory.length>0 && sortedHistory.map((saleEntry) => {

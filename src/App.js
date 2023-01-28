@@ -148,6 +148,20 @@ function App() {
   const historyCollectionRef = collection(db, "saleHistory")
   const [sortedHistory, setSortedHistory] = useState([])
 
+  const sortFunctions = {
+    newToOld: () => {
+      let filterArray = [...sortedHistory]
+      let sortedArray = filterArray.sort((a, b) => b.postID - a.postID)
+      setSortedHistory(sortedArray)
+    },
+    
+    oldToNew: () => {
+      let filterArray = [...sortedHistory]
+      let sortedArray = filterArray.sort((a, b) => a.postID - b.postID)
+      setSortedHistory(sortedArray)
+    },
+  }
+
   useEffect(() => {
     if (user && firebaseHistoryDB) {
       // let cartObject = []
@@ -311,7 +325,7 @@ function App() {
             <AboutComponent user={user} firebaseItemsDB={firebaseItemsDB} /> }>
           </Route>
           <Route path='/history' element={ user && 
-            <HistoryComponent user={user} firebaseHistoryDB={firebaseHistoryDB} sortedHistory={sortedHistory} /> }>
+            <HistoryComponent user={user} firebaseHistoryDB={firebaseHistoryDB} sortedHistory={sortedHistory} sortFunctions={sortFunctions} /> }>
           </Route>
         </Routes>
       </div>
