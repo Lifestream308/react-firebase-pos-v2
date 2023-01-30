@@ -11,7 +11,7 @@ import RegisterComponent from './components/RegisterComponent';
 import UpdateComponent from './components/UpdateComponent';
 import AboutComponent from './components/AboutComponent';
 import HistoryComponent from './components/HistoryComponent';
-import { async } from '@firebase/util';
+import TestComponent from './components/TestComponent';
 
 function App() {
 
@@ -168,9 +168,6 @@ function App() {
       let filterArray = firebaseHistoryDB.filter(saleEntry => saleEntry.companyEmail === user.email)
       let sortedArray = filterArray.sort((a, b) => b.postID - a.postID)
 
-      // filterArray.forEach(item => {
-      //   cartObject.push({ name: item.menuItemName, amount : 0, price : item.Price, id: item.id })
-      // })
       setSortedHistory(sortedArray)
   }
   }, [firebaseHistoryDB, user])
@@ -213,7 +210,6 @@ function App() {
 
 
   // Cart Functions and Logic
-
   const [cartList, setCartList] = useState([])
   const [total, setTotal] = useState(0)
   const [totalItems, setTotalItems] = useState(0)
@@ -230,7 +226,6 @@ function App() {
     handleItemsInCart()
     }
 
-    // handle an array later. resets cart when url changes. If user changes, need a new filtered Items list
   const location = useLocation()  
   useEffect(() => {
     resetCart()
@@ -322,10 +317,13 @@ function App() {
             <UpdateComponent user={user} firebaseItemsDB={firebaseItemsDB} updateItem={updateItem} deleteUser={deleteUser} itemPriceRef={itemPriceRef} /> }>
           </Route>
           <Route path='/about' element={ user && 
-            <AboutComponent user={user} firebaseItemsDB={firebaseItemsDB} /> }>
+            <AboutComponent user={user} /> }>
           </Route>
           <Route path='/history' element={ user && 
             <HistoryComponent user={user} firebaseHistoryDB={firebaseHistoryDB} sortedHistory={sortedHistory} sortFunctions={sortFunctions} /> }>
+          </Route>
+          <Route path='/test' element={ user && 
+            <TestComponent user={user} /> }>
           </Route>
         </Routes>
       </div>
