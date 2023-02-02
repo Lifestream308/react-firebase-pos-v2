@@ -95,6 +95,29 @@
 }
 .loginComponent__inputCard hr {color: rgb(224, 215, 215);}
 
+/* Component side Navigation */
+.Component__sideNav {
+  display: none;
+  text-align: left;
+}
+
+.Component__sideNav ul{
+  list-style: none;
+  width: fit-content;
+}
+.Component__sideNav li{
+  font-size: 130%;
+}
+.Component__sideNav li:hover{
+  background-color: gainsboro;
+}
+.Component__sideNav a{
+  text-decoration: none;
+}
+.Component__sideNav a:visited{
+  color: black;
+}
+
 /* userComponent */
 .userComponent__nav {
   display: flex;
@@ -353,5 +376,10 @@
 @media (max-width: 500px) {
   .itemComponent {
     margin: 1px;
+  }
+}
+@media (min-width: 500px) {
+  .Component__sideNav {
+    display: block;
   }
 }
