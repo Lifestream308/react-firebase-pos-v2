@@ -166,6 +166,7 @@
   border: none;
   background: none;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .itemComponent__input {
   font-size: 1rem;
